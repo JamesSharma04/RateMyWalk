@@ -21,4 +21,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('RateMyWalk/', include('rate_my_walk.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('registration.backends.simple.urls')),
 ]
