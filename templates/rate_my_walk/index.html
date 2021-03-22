@@ -6,5 +6,49 @@
 {% endblock %}
 
 {% block body_block %}
-    <h3>This is the index page!</h3>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-6">
+                    <div class="card-body">
+                        <h2>Top 5 Most Enjoyable Walks</h2>
+                        <p class="card-text">
+                        {% if enjoyment %}
+                        <ul class="list-group">
+                        {% for walk in enjoyment %}
+                            <li class="list-group-item">
+                            <a href="{% url 'rate_my_walk:showWalk' walk.slug %}">{{ walk.name }} with rating {{ walk.enjoyment }}</a>
+                                <!-- url 'rate_my_walk:showWalk' category.slug-->
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        {% else %}
+                        <strong>There are no walks present.</strong>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-md-6">
+                <div class="card mb-6">
+                    <div class="card-body">
+                        <h2>Most Recent Walks</h2>
+                        <p class="card-text">
+                        {% if recent %}
+                            <ul class="list-group">
+                            {% for walk in recent %}
+                                <li class="list-group-item">
+                                    <a href="{% url 'rate_my_walk:showWalk' walk.slug %}">{{ walk.name }} on {{ walk.date }}</a>       
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        {% else %}
+                            <strong>There are no pages present.</strong>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

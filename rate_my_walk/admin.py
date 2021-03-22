@@ -1,3 +1,5 @@
 from django.contrib import admin
+from rate_my_walk.models import Walk
 
-# Register your models here.
+admin.site.register(Walk)
+

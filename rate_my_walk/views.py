@@ -3,20 +3,17 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rate_my_walk.models import User, WalkPage, Rating, Photo, Comment
+from rate_my_walk.models import Walk,User, WalkPage, Rating, Photo, Comment
 from rate_my_walk.forms import UserForm, WalkPageForm, RatingForm, PhotoForm, CommentForm
 
 
 def index(request):
     #here I use id as it's in the ER diagram, but for urls we would sue names so might be worth setting name up as a unique foreign key
-    most_enjoyable = Rating.objects.order_by('-Enjoyment')[:5]
-    most_recent = Rating.objects.order_by('-date')[:5]
-    context_dict = {'enjoyable': most_enjoyable,
+    most_enjoyable = Walk.objects.order_by('-enjoyment')[:5]
+    most_recent = Walk.objects.order_by('-date')[:5]
+    context_dict = {'enjoyment': most_enjoyable,
                     'recent': most_recent}
-    
-    response = render(request, 'RateMyWalk/index.html', context=context_dict)
-    #return response
-    return HttpResponse("HERE")
+    return render(request, 'rate_my_walk/index.html', context=context_dict)
 
 def contact_us(request):
     context_dict = {}
@@ -29,20 +26,19 @@ def about(request):
     return HttpResponse("about us page")
 
 def walks(request):
-    allWalks = WalkPage.objects.all()
-    context_dict = {'walk_list': allWalks,}
-    return render(request, 'RateMyWalk/walks.html', context=context_dict)
-    return HttpResponse("all walks to browse")
+    #allWalks = WalkPage.objects.all()
+    #context_dict = {'walk_list': allWalks,}
+    return render(request, 'rate_my_walk/walks.html') #, context=context_dict)
 
 def showWalk(request, walk_name_slug):
     context_dict = {}
     
     try:
-        walk = WalkPage.objects.get(slug = walk_name_slug)
+        walk = Walk.objects.get(slug = walk_name_slug)
         context_dict['walk'] = walk
     except WalkPage.DoesNotExist:
         context_dict['walk'] = None
-    return render(request, 'RateMyWalk/walk.html', context=context_dict)
+    ##return render(request, 'rate_my_walk/walk.html', context=context_dict)
     return HttpResponse("shows the clicked walk, based on slug")
 
 def moreImages(request, walk_name_slug):
@@ -112,4 +108,4 @@ def editWalk(request, walk_name_slug):
     walkName = walk.Name
     #put extracted infos into context_dict to show in html
     context_dict = {'walkName': walkName,}
-    return HttpResponse("same form as upload, but already filled out and able to change")
+    return HttpResponse("same form as upload, but already filled out and able to change")"""
