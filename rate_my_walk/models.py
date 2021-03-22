@@ -5,7 +5,8 @@ from django.utils import timezone
 
 # Create your models here.
 
-# This model is for walks
+# This model is for walks. It's similar to the Page model, I was just 
+# making this to test the templates.
 class Walk(models.Model):
 	NAME_MAX_LENGTH = 128
 	
@@ -67,7 +68,6 @@ class Page(models.Model):
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-	website = models.URLField(blank=True)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
 	
 	def __str__(self):
