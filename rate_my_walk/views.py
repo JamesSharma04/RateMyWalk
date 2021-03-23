@@ -17,13 +17,13 @@ def index(request):
 
 def contact_us(request):
     context_dict = {}
-    #return render(request, 'RateMyWalk/contact_us.html', conext=context_dict)
-    return HttpResponse("contact us page")
+    return render(request, 'rate_my_walk/contact_us.html', context=context_dict)
+    #return HttpResponse("contact us page")
 
 def about(request):
     context_dict = {}
-    return render(request, 'RateMyWalk/about.html', context=context_dict)
-    return HttpResponse("about us page")
+    return render(request, 'rate_my_walk/about.html', context=context_dict)
+    #return HttpResponse("about us page")
 
 def walks(request):
     allWalks = WalkPage.objects.all()
