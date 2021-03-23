@@ -7,7 +7,7 @@ from django.utils import timezone
 
 # This model is for walks. It's similar to the Page model, I was just 
 # making this to test the templates.
-class Walk(models.Model):
+class WalkPage(models.Model):
 	NAME_MAX_LENGTH = 128
 	
 	name = models.CharField(max_length=128, unique=True)
@@ -24,7 +24,7 @@ class Walk(models.Model):
 	
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
-		super(Walk, self).save(*args, **kwargs)
+		super(WalkPage, self).save(*args, **kwargs)
 	
 	class Meta:
 		verbose_name_plural = 'Walks'

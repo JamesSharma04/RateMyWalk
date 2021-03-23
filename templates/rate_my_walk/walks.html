@@ -6,5 +6,43 @@
 {% endblock %}
 
 {% block body_block %}
-    <h3>Walks</h3>
+
+<link rel="stylesheet" href="{% static 'rate_my_walk/RMWWalkscss.css' %}" />
+
+<div class = "jumbotron p-4">
+    <div class="container">
+        <h1 class="jumbotron-heading">Walks</h1>
+    </div>
+</div>
+
+<div class="scrollbox">
+    <div class="card mb-6">
+        <div class="card-body">
+            <h5>Title of Walk</h5>
+                {% if walk_list %}
+                    <ul class="list-group">
+                    {% for walk in walk_list %}
+                    <div class="row">
+                        <div class="col-md-8">
+                        <li class="list-group-item">
+                            <a href="{% url 'rate_my_walk:showWalk' walk.slug %}">{{ walk.name }}</a>       
+                        </li>
+                        </div>
+                        
+                        <div class="col-md-4">
+                        <li class="list-group-item">
+                            {{ walk.enjoyment }}
+                        </li>
+                        </div>
+                    </div>          
+                    {% endfor %}
+      
+                    </ul>      
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
 {% endblock %}
