@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rate_my_walk.models import User, WalkPage, Rating, Photo, Comment
-from rate_my_walk.forms import UserForm, WalkPageForm, RatingForm, PhotoForm, CommentForm
+#from rate_my_walk.forms import UserForm, WalkPageForm, RatingForm, PhotoForm, CommentForm
 
 
 def index(request):
@@ -38,11 +38,22 @@ def showWalk(request, walk_name_slug):
         context_dict['walk'] = walk
     except WalkPage.DoesNotExist:
         context_dict['walk'] = None
+
+    #tried to include all comments under a walk.
+    #wouldnt't allow datefiedl included in the ForeignKey 
+    # if walk:
+    #     try:
+    #         comments = Comment.objects.get(walkPage=walk)
+    #         context_dict['comments'] = comments
+    #     except WalkPage.DoesNotExist:
+    #         context_dict['comments'] = None
+    
     return render(request, 'rate_my_walk/walk.html', context=context_dict)
     #return HttpResponse("shows the clicked walk, based on slug")
 
 def moreImages(request, walk_name_slug):
-    allImages = Photo.objects.get(slug = walk_name_slug)
+    currentWalk = WalkPage.objects.get(slug=walk_name_slug)
+    allImages = Photo.objects.get(walkPage=currentWalk)
     context_dict = {'images': allImages}
     return render(request, 'RateMyWalk/moreImages.html', context=context_dict)
     return HttpResponse("shows all pictures for one walk based on slug")
@@ -65,7 +76,7 @@ def rateWalk(request, walk_name_slug):
         if form.is_Valid():
             if walk:
                 rating = form.save(commit = False)
-                rating.walk = walk
+                rating.walkPage = walk
                 rating.save()
                 
                 return redirect(reverse('RateMyWalk:show_walk', kwargs = {'walk_name_slug': walk_name_slug}))
@@ -103,9 +114,50 @@ def uploadWalk(request):
 @login_required()
 def editWalk(request, walk_name_slug):
     #find the walk object to edit
-    walk = WalkPage.objects.get(slug=walk_name_slug)
-    #extract required infos for auto fill
-    walkName = walk.Name
-    #put extracted infos into context_dict to show in html
-    context_dict = {'walkName': walkName,}
-    return HttpResponse("same form as upload, but already filled out and able to change")"""
+    try:
+        walk = WalkPage.objects.get(slug=walk_name_slug)
+    except WalkPage.DoesNotExist:
+        walk = None
+    
+    if walk is None:
+        redirect('RateMyWalk')
+
+    if request.method == "GET":
+        #extract required infos for auto fill
+        walkName = walk.Name
+        #put extracted infos into context_dict to show in html
+        context_dict = {'walkName': walkName,}
+        #html - <input value="{{walkName}}"/>
+        return render(request, 'RateMyWalk/upload_walk.html', context=context_dict)
+    
+    if request.method == "POST":
+        #if walk already exists update it - or delete and create again?
+        #redirect to walkPage
+        return redirect(reverse('RateMyWalk:walk.html', kwargs = {'walk_name_slug': walk_name_slug}))
+
+
+@login_required()
+def uploadMorePhotos(request, walk_name_slug):
+    try:
+        walk = WalkPage.objects.get(slug=walk_name_slug)
+    except WalkPage.DoesNotExist:
+        walk = None
+    
+    if walk is None:
+        return redirect('/RateMyWalk/')
+
+    form = PhotoForm()
+    
+    if request.method == "POST":
+        form = PhotoForm(request.POST)
+        
+        if form.isValid():
+            if walk:
+                photo = form.save(commit=False)
+                photo.walkPage = walk
+                walk.save()
+                return redirect(reverse('RateMyWalk:moreImages', kwargs = {'walk_name_slug': walk_name_slug}))
+        else:
+            print(form.errors)
+    
+    return render(request, 'RateMyWalk/upload_more_photos.html', {'form': form})
