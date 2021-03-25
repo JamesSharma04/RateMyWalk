@@ -108,4 +108,4 @@ def editWalk(request, walk_name_slug):
     walkName = walk.Name
     #put extracted infos into context_dict to show in html
     context_dict = {'walkName': walkName,}
-    return HttpResponse("same form as upload, but already filled out and able to change")"""
+    return HttpResponse("same form as upload, but already filled out and able to change")

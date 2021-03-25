@@ -4,5 +4,14 @@
 }
 
 #footer {
-    background: grey;
+    background: dark;
+}
+
+.navbarText{
+    color: white;
+}
+
+#contact_usFooter{
+    color: white;
+    float: right;
 }
