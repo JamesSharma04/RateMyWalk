@@ -108,7 +108,7 @@ def uploadWalk(request):
             return redirect('RateMyWalk')
         else:
             print(form.errors)
-    return render(request, 'RateMyWalk/upload_walk.html', {'form': form})
+    return render(request, 'rate_my_walk/uploadWalk.html', {'form': form})
     return HttpResponse("form to upload a walk")
 
 @login_required()
