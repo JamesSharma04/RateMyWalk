@@ -7,6 +7,8 @@
 
 {% block body_block %}
 
+<script src="https://unpkg.com/feather-icons"></script>
+
 <link href="https://getbootstrap.com/docs/4.2/examples/product/product.css" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'rate_my_walk/RMWWalkcss.css' %}" />
 <div class = "jumbotron p-4">
@@ -19,14 +21,15 @@
   <div class="row">
     <div class="col-md-8">
 
-      <article class="blog-post"> 
-        <h2 class="blog-post-title">{{ walk.name }}</h2>
-
+      <article class="blog-post">
+        <h3>Description</h3>
         <p>{{ walk.desc }}</p>
-        <ul>
-          <li>Start point: {{ walk.start }}</li>
-          <li>End point: {{ walk.end }}</li>
+        <br />
+        <ul class="list-unstyled">
+          <li><span data-feather="play"></span>Start walk on {{ walk.start }}</li>
+          <li><span data-feather="stop-circle"></span>End walk on {{ walk.end }}</li>
         </ul>
+
       </article><!-- /.blog-post end of desc -->
 
       <article class="blog-post">
@@ -34,10 +37,10 @@
         <div class="row">
 
             <div class="row-md-6">
-            <ul>
-                <li>Difficulty: </li>
-                <li>Duration: </li>
-                <li>How Enoyable: </li>
+            <ul class="list-unstyled">
+                <li><span data-feather="star"></span>Difficulty: </li>
+                <li><span data-feather="star"></span>Duration: </li>
+                <li><span data-feather="star"></span>How Enoyable: </li>
             </ul>
             </div>
             
@@ -59,21 +62,26 @@
             <p class="mb-0">Image</p>
         </div>
 
-        <div class="p-4 mb-3 bg-light rounded">
-            <nav class="nav d-flex justify-content-between">
-                <a class="p-2 link-secondary" href="#">More Images</a>
+        <div class="py-1 mb-2 bg-dark rounded">
+            <nav class="nav d-flex justify-content-center">
+                <a class="p-2 link-secondary" href="#"><p class="navbarText">More Images</p></a>
             </nav>
         </div>
 
-        <div class="p-4">
-            <nav class="nav d-flex justify-content-between">
-                <a class="p-2 link-secondary" href="#">Rate Walk Yourself</a>
+        <div class="py-1 mb-2 bg-dark rounded">
+            <nav class="nav d-flex justify-content-center">
+                <a class="p-2 link-secondary" href="#"><p class="navbarText">Rate Walk Yourself</p></a>
             </nav>
         </div>
+        
     </div>
 
   </div><!-- /.row -->
 
 </main><!-- /.container -->
+
+<script>
+      feather.replace()
+</script>
 
 {% endblock %}
