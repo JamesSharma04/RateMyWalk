@@ -1,13 +1,13 @@
 {% extends 'rate_my_walk/base.html' %}
 
 {% block title_block %}
-    Login
+    Register
 {% endblock %}
 
 {% block body_block %}
 <div class = "jumbotron p-4">
         <div class="container">
-            <h1 class="jumbotron-heading">Login</h1>
+            <h1 class="jumbotron-heading">Register</h1>
         </div>
 </div>
 
@@ -18,20 +18,22 @@
     <form class="form-signin" role="form" method="post" action=".">
         {% csrf_token %}
 		{{ form.as_p }}
-		<!-- again commented out
-        <label for="inputUsername" class="sr-only">Username</label>
+		
+        <!-- Commented out for now, dont know enough CSS to make the redux form look nice
+		<label for="inputUsername" class="sr-only">Username</label>
         <input type="text" name="username" id="id_username" class="form-control"
                placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="id_password" class="form-control"
                placeholder="Password" required>
 			   -->
-        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Log In">Log in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Register">Register</button>
+		
     </form>
 </div>
 
 <p>
-    Not registered?
-    <a href="{% url 'registration_register' %}">Register here!</a>
+    Already got an account?
+    <a href="{% url 'auth_login' %}">Log in here!</a>
 </p>
 {% endblock %}

@@ -41,10 +41,10 @@
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         {% if user.is_authenticated %}
                             <p>Signed in as {{ user.username }}</p>
-                            <a class="btn btn-sm btn-outline-secondary" href="#">Log Out</a>
+                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'auth_logout' %}?next={% url 'rate_my_walk:index'%}">Log Out</a>
                         {% else %}
                             <a class="btn btn-sm btn-outline-secondary" href="{% url 'auth_login' %}">Log In</a>
-                            <a class="btn btn-sm btn-outline-secondary" href="#">Sign Up</a>
+                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'registration_register' %}">Sign Up</a>
                         {% endif %}
                     </div>
                 </div>
