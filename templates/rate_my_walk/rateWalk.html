@@ -17,8 +17,8 @@
 
 <div class="container">
     <div class="row">
-            <form role="form" id="page_form" method="post"
-                  action="{% url 'rate_my_walk:rateWalk' category.slug %}">
+        <form role="form" id="rateWalk" method="post"
+                  action="{% url 'rate_my_walk:rateWalk' walk.slug %}">
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}

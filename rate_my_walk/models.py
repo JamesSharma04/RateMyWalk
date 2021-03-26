@@ -16,6 +16,8 @@ class WalkPage(models.Model):
 	end = models.CharField(max_length=128, unique=True)
 	slug = models.SlugField(unique=True)
 
+	cover = models.ImageField(blank=True)
+
 	enjoyment = models.IntegerField(default=0)
 	duration = models.IntegerField(default=0)
 	difficulty = models.IntegerField(default=0)
@@ -90,19 +92,14 @@ class Comment(models.Model):
 		return self.title
 		
 class Rating(models.Model):
-	TITLE_MAX_LENGTH = 128
-	URL_MAX_LENGTH = 200
 
-	title = models.CharField(max_length=128)
-	url = models.URLField()
-	views = models.IntegerField(default=0)
-	length = models.IntegerField(default=0)
+	walk = models.ForeignKey(WalkPage, on_delete=models.CASCADE)
 	duration = models.IntegerField(default=0)
 	difficulty = models.IntegerField(default=0)
 	enjoyment = models.IntegerField(default=0)
 	
 	def __str__(self):
-		return self.title
+		return self.enjoyment
 		
 class Photo(models.Model):
 	TITLE_MAX_LENGTH = 128

@@ -32,17 +32,13 @@ class WalkPageForm(forms.ModelForm):
         #slug not needed but date?
 
 class RatingForm(forms.ModelForm):
-	#title = forms.CharField(max_length=128)
-	#url = forms.URLField()
-	#views = forms.IntegerField(default=0)
-	#length = forms.IntegerField(default=0)
-	duration = forms.IntegerField(initial = 0)
-	difficulty = forms.IntegerField(initial = 0)
-	enjoyment = forms.IntegerField(initial = 0)
+    duration = forms.IntegerField(help_text="Duration", initial = 0)
+    difficulty = forms.IntegerField(help_text="Difficulty", initial = 0)
+    enjoyment = forms.IntegerField(help_text="Enjoyment", initial = 0)
 
-	class Meta:
-		model = Rating
-		exclude = ('WalkPage', 'title', 'url', 'views', 'length',)
+    class Meta:
+        model = Rating
+        exclude = ('walk',)
 
 class PhotoForm(forms.ModelForm):
     	
@@ -69,6 +65,3 @@ class CommentForm(forms.ModelForm):
     
     class Meta:
         model = Comment
-
-
-

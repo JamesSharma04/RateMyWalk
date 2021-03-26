@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rate_my_walk.models import User, WalkPage, Rating, Photo, Comment
+from rate_my_walk.forms import RatingForm
 #from rate_my_walk.forms import UserForm, WalkPageForm, RatingForm, PhotoForm, CommentForm
 
 
@@ -73,14 +74,18 @@ def rateWalk(request, walk_name_slug):
     if request.method == 'POST':
         form = RatingForm(request.POST)
         
-        if form.is_Valid():
+        if form.is_valid():
             if walk:
                 rating = form.save(commit = False)
-                rating.walkPage = walk
+                rating.walk = walk
                 rating.save()
-                
-                return redirect(reverse('RateMyWalk:show_walk', kwargs = {'walk_name_slug': walk_name_slug}))
-    return HttpResponse("can rate a specific walk on this page based on slug")
+                return redirect(reverse('rate_my_walk:showWalk', kwargs = {'walk_name_slug': walk_name_slug}))
+        else:
+            print(form.errors)
+
+    context_dict = {'form': form, 'walk': walk}
+    return render(request, 'rate_my_walk/rateWalk.html', context_dict)
+    ##return HttpResponse("can rate a specific walk on this page based on slug")
 
 @login_required()
 def myAccount(request, username):
@@ -93,7 +98,7 @@ def myAccount(request, username):
     
     context_dict = {'user': user,
                     'walks': walks,}
-    return render(request, 'RateMyWalk/my_profile.html', context=context_dict)
+    return render(request, 'rate_my_walk/my_profile.html', context=context_dict)
     return HttpResponse("Account details with link to mywalks")
 
 @login_required()
