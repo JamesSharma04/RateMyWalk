@@ -13,8 +13,9 @@ urlpatterns = [
     path('walks/', views.walks, name='walks'),
     path("walks/<slug:walk_name_slug>/", views.showWalk, name='showWalk'),
     path("walks/<slug:walk_name_slug>/more-images/", views.moreImages, name='more_images'),
-    path("walks/<slug:walk_name_slug>/rate-walk/", views.rateWalk, name='rate_walk'),
-    path("walks/upload/", views.uploadWalk, name='upload_walk'),
+    path("walks/<slug:walk_name_slug>/rate-walk/", views.rateWalk, name='rateWalk'),
+    # Note: path("walks/upload/", views.uploadWalk, name='uploadWalk') causes error
+    path("upload/", views.uploadWalk, name='uploadWalk'),
     path("walks/<slug:walk_name_slug>/edit/", views.editWalk, name='edit_walk'),
     #login urls
 ]
