@@ -14,7 +14,7 @@ class WalkPageForm(forms.ModelForm):
                           help_text = "Enter end location of your walk")
     
     #how to deal with uploaded pictures in forms?
-    cover = forms.ImageField(upload_to='page_image', blank=True)
+    cover = forms.ImageField()
     
     enjoyment = forms.IntegerField(initial = 0)
     duration = forms.IntegerField(initial = 0)
@@ -24,7 +24,7 @@ class WalkPageForm(forms.ModelForm):
     
     #how to deal with date fields in forms?
     #shoud be hidden and it takes current date when creating the object anyways?
-    date = forms.DateField(default=timezone.now())
+    #date = forms.DateField(timezone.now())
     
     class Meta:
         model = WalkPage
@@ -39,7 +39,7 @@ class RatingForm(forms.ModelForm):
     class Meta:
         model = Rating
         exclude = ('walk',)
-
+"""
 class PhotoForm(forms.ModelForm):
     	
 	date = forms.DateField()
@@ -65,3 +65,4 @@ class CommentForm(forms.ModelForm):
     
     class Meta:
         model = Comment
+"""

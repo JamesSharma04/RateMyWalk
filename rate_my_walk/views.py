@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rate_my_walk.models import User, WalkPage, Rating, Photo, Comment
-from rate_my_walk.forms import RatingForm
+from rate_my_walk.forms import RatingForm, WalkPageForm
 #from rate_my_walk.forms import UserForm, WalkPageForm, RatingForm, PhotoForm, CommentForm
 
 
@@ -108,13 +108,13 @@ def uploadWalk(request):
     if request.method == "POST":
         form = WalkPageForm(request.POST)
         
-        if form.isValid():
+        if form.is_valid():
             form.save(commit = True)
-            return redirect('RateMyWalk')
+            return redirect(reverse('rate_my_walk:index'))
         else:
             print(form.errors)
     return render(request, 'rate_my_walk/uploadWalk.html', {'form': form})
-    return HttpResponse("form to upload a walk")
+    ##return HttpResponse("form to upload a walk")
 
 @login_required()
 def editWalk(request, walk_name_slug):

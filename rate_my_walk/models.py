@@ -16,13 +16,13 @@ class WalkPage(models.Model):
 	end = models.CharField(max_length=128, unique=True)
 	slug = models.SlugField(unique=True)
 
-	cover = models.ImageField(blank=True)
+	cover = models.ImageField(upload_to='page_image', default='default.jpg')
 
 	enjoyment = models.IntegerField(default=0)
 	duration = models.IntegerField(default=0)
 	difficulty = models.IntegerField(default=0)
 
-	date = models.DateField(default=timezone.now())
+	date = models.DateField(default=timezone.now)
 	
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
@@ -51,7 +51,7 @@ class Category(models.Model):
 	
 	def __str__(self):
 		return self.name
-
+"""
 class Page(models.Model):
 	TITLE_MAX_LENGTH = 128
 	URL_MAX_LENGTH = 200
@@ -66,11 +66,11 @@ class Page(models.Model):
 	
 	def __str__(self):
 		return self.title
-		
+"""
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-	picture = models.ImageField(upload_to='profile_images', blank=True)
+	##picture = models.ImageField(upload_to='profile_images', blank=True)
 	
 	def __str__(self):
 		return self.user.username
@@ -107,4 +107,4 @@ class Photo(models.Model):
 	
 	date = models.DateField()
 	owner = models.CharField(max_length=128)
-	picture = models.ImageField(upload_to='page_image', blank=True)
+	##picture = models.ImageField(upload_to='page_image', blank=True)
