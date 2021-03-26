@@ -15,27 +15,31 @@ def populate():
     'cover': 'static/images/kg_park_walk_pic.jpg',
     'enjoyment':'8',
     'duration':'3',
-    'difficulty':'5'
-    'date':'2021-02-24'}
+    'difficulty':'5',
+    'date':'2021-02-24',},
     {'name': 'Kelvin Walkway',
     'desc': 'Had a good time going along the river',
     'start': 'At the skatepark ',
-    'end': 'At the botanic gardens'
+    'end': 'At the botanic gardens',
     'cover': 'static/images/kelvin_walkway_walk_pic.jpg',
     'enjoyment':'9',
     'duration':'5',
-    'difficulty':'4'
-    'date':'2021-02-28'}
+    'difficulty':'4',
+    'date':'2021-02-28',},
     {'name': 'Buchanan Street',
     'desc': 'Was nice looking at all the shops, saw some buskers. It was raining though.',
     'start': 'At Sauchiehall street by the concert hall ',
-    'end': 'At argyle street'
+    'end': 'At argyle street',
     'cover': 'static:buchanan_street_walk_pic.jpg',
     'enjoyment':'6',
     'duration':'2',
-    'difficulty':'2'
-    'date':'2021-03-14'}  
-    ]   
+    'difficulty':'2',
+    'date':'2021-03-14'}, 
+    ]
+    
+    for w in walk_examples:
+        add_page(name=w['name'],desc=w['desc'],start=w['start'],end=w['end'],cover=w['end'],enjoyment=w['enjoyment'],duration=w['duration'],difficulty=w['difficulty'],date=w['date'])
+    
 
 def add_page(name,desc,start,end,cover,enjoyment=5,duration=5,difficulty=5,date=timezone.now()):
     w = WalkPage.objects.get_or_create(name=name)[0]
