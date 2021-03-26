@@ -1,4 +1,4 @@
-# RateMyWalk
+# WAD2 - Team 8F - RateMyWalk
 
 ## External Sources Used
 
