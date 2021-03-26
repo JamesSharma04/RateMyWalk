@@ -42,6 +42,7 @@ def populate():
     
 
 def add_page(name,desc,start,end,cover,enjoyment=5,duration=5,difficulty=5,date=timezone.now()):
+    #[0] returns the object reference only
     w = WalkPage.objects.get_or_create(name=name)[0]
     w.views = views
     w.start = start
