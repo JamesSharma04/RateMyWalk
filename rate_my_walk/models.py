@@ -11,16 +11,16 @@ class WalkPage(models.Model):
 	NAME_MAX_LENGTH = 128
 	
 	name = models.CharField(max_length=128, unique=True)
-	desc = models.CharField(max_length=128, unique=True)
+	desc = models.CharField(max_length=2048, unique=True)
 	start = models.CharField(max_length=128, unique=True)
 	end = models.CharField(max_length=128, unique=True)
 	slug = models.SlugField(unique=True)
 
 	cover = models.ImageField(upload_to='page_image', default='default.jpg')
 
-	enjoyment = models.IntegerField(default=0)
-	duration = models.IntegerField(default=0)
-	difficulty = models.IntegerField(default=0)
+	enjoyment = models.IntegerField(default=5)
+	duration = models.IntegerField(default=5)
+	difficulty = models.IntegerField(default=5)
 
 	date = models.DateField(default=timezone.now)
 	
