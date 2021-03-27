@@ -57,7 +57,7 @@
                     <a class="p-2 link-secondary" href="{% url 'rate_my_walk:walks' %}"><p class="navbarText">Walks</p></a>
                   {% if user.is_authenticated %}
                     <a class="p-2 link-secondary" href="{% url 'rate_my_walk:uploadWalk' %}"><p class="navbarText">Upload a Walk</p></a>
-                    <a class="p-2 link-secondary" href="#"><p class="navbarText">My Account</p></a>
+                    <a class="p-2 link-secondary" href="{% url 'rate_my_walk:my_account' %}"><p class="navbarText">My Account</p></a>
                   {% else %}
                     <a class="p-2 link-secondary" href="{% url 'auth_login' %}"><p class="navbarText">Upload a Walk</p></a>
                     <a class="p-2 link-secondary" href="{% url 'auth_login' %}"><p class="navbarText">My Account</p></a>

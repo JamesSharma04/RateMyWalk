@@ -87,6 +87,38 @@
   </div><!-- /.row -->
   
   
+  
+      <article class="blog-post">
+        <h3>User Ratings</h3>
+        <div class="row">
+			{% if difficulty %}
+				<div class="row-md-6">
+				<ul class="list-unstyled">
+					<li><span data-feather="star"></span>Difficulty: </li>
+					<li><span data-feather="star"></span>Duration: </li>
+					<li><span data-feather="star"></span>How Enoyable: </li>
+				</ul>
+				</div>
+				
+				<div class="row-md-2">
+				<ul class="list-unstyled">
+					<li class="alignedRating">{{ difficulty }}</li>
+					<li class="alignedRating">{{ duration }}</li>
+					<li class="alignedRating">{{ enjoyment }}</li>
+				</ul>
+				</div>
+			{% else %}
+				<span data-feather="star"></span>No one rated this walk yet.
+			{% endif %}
+        </div>
+        
+      </article><!-- /.blog-post -->
+
+  
+  
+  
+  
+  
   <div>
     <div>
             <form id="photo_form" method="post" action="{% url 'rate_my_walk:showWalk' walk.slug %}", enctype="multipart/form-data">

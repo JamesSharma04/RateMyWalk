@@ -29,7 +29,7 @@ class WalkPageForm(forms.ModelForm):
     
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     
-    date = forms.DateField(widget=forms.HiddenInput)
+    date = forms.DateField(widget=forms.HiddenInput, required=False)
     
     class Meta:
         model = WalkPage

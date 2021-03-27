@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Walks
+    Walks of {{ username }}
 {% endblock %}
 
 {% block body_block %}
@@ -11,6 +11,18 @@
     <div class="container">
         <h1 class="jumbotron-heading">My Account</h1>
     </div>
+</div>
+
+<div>
+	{% if walks %}
+		<ul>
+		{% for walk in walks %}
+			<div><li> <a href="{% url 'rate_my_walk:showWalk' walk.slug %}">{{ walk.name }}</a> </li></div>
+		{% endfor %}
+		<ul>
+	{% else %}
+		<p><strong>You haven't uploaded any walks yet.</strong></p>
+	{% endif %}
 </div>
 
 {% endblock %}

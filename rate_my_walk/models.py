@@ -22,9 +22,9 @@ class WalkPage(models.Model):
 	
 	owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='User', null=True)
 	name = models.CharField(max_length=128, unique=True)
-	desc = models.CharField(max_length=2048, unique=True)
-	start = models.CharField(max_length=128, unique=True)
-	end = models.CharField(max_length=128, unique=True)
+	desc = models.CharField(max_length=2048)
+	start = models.CharField(max_length=128)
+	end = models.CharField(max_length=128)
 	slug = models.SlugField(unique=True)
 
 	cover = models.ImageField(upload_to='page_image', default='default.jpg')

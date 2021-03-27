@@ -37,12 +37,35 @@ def walks(request):
 def showWalk(request, walk_name_slug):
     context_dict = {}
     
+    #check if walk wxists based on slug
     try:
         walk = WalkPage.objects.get(slug = walk_name_slug)
         context_dict['walk'] = walk
     except WalkPage.DoesNotExist:
         context_dict['walk'] = None
+    
+    #get mean user ratings
+    ratings = Rating.objects.filter(walk=walk)
+    if ratings:
+        counter = 0
+        difficulty_sum = 0
+        duration_sum = 0
+        enjoyment_sum = 0
+        
+        for rating in ratings:
+            difficulty_sum += rating.difficulty
+            duration_sum += rating.duration
+            enjoyment_sum = rating.enjoyment
+            counter += 1
+            
+        difficulty_mean = difficulty_sum/counter
+        duration_mean = duration_sum/counter
+        enjoyment_mean = enjoyment_sum/counter
+        context_dict['duration'] = duration_mean
+        context_dict['difficulty'] = difficulty_mean
+        context_dict['enjoyment'] = enjoyment_mean
 
+        
     #tried to include all comments under a walk.
     #wouldnt't allow datefiedl included in the ForeignKey 
     # if walk:
@@ -130,7 +153,7 @@ def myAccount(request):
     # except User.DoesNotExist:
     #     return redirect(reverse('RateMyWalk:index'))
     
-    walks = WalkPage.objects.get(owner = request.user)
+    walks = WalkPage.objects.filter(owner=request.user)
     
     context_dict = {'username': request.user,
                     'walks': walks,}
