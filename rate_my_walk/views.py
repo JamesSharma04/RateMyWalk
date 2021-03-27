@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rate_my_walk.models import User, WalkPage, Comment, Photo, Rating
-from rate_my_walk.forms import RatingForm, WalkPageForm, PhotoForm
+from rate_my_walk.forms import RatingForm, WalkPageForm, PhotoForm, CommentForm
 #from rate_my_walk.forms import UserForm, WalkPageForm, RatingForm, PhotoForm, CommentForm
 from rate_my_walk.bing_search import run_query
 from django.utils import timezone
@@ -37,7 +37,7 @@ def walks(request):
 def showWalk(request, walk_name_slug):
     context_dict = {}
     
-    #check if walk wxists based on slug
+    #check if walk exists based on slug
     try:
         walk = WalkPage.objects.get(slug = walk_name_slug)
         context_dict['walk'] = walk
@@ -65,20 +65,18 @@ def showWalk(request, walk_name_slug):
         context_dict['difficulty'] = difficulty_mean
         context_dict['enjoyment'] = enjoyment_mean
 
+    #get all comments
+    all_comments = Comment.objects.filter(walk=walk)
+    if all_comments:
+        context_dict['comments'] = all_comments
         
-    #tried to include all comments under a walk.
-    #wouldnt't allow datefiedl included in the ForeignKey 
-    # if walk:
-    #     try:
-    #         comments = Comment.objects.get(walkPage=walk)
-    #         context_dict['comments'] = comments
-    #     except WalkPage.DoesNotExist:
-    #         context_dict['comments'] = None
     
     result_list = []
     query=""
     photo_form = PhotoForm()
+    comment_form = CommentForm()
     context_dict['photo_form'] = photo_form
+    context_dict['comment_form'] = comment_form
     
     if request.method == 'POST':
         #search related post
@@ -87,18 +85,28 @@ def showWalk(request, walk_name_slug):
             if query:
                 result_list = run_query(query)
         
+        #if post is about comments
+        if 'comment' in request.POST and 'title' in request.POST:
+            comment_form = CommentForm(request.POST)
+            print(request.POST)
+            if comment_form.is_valid():
+                if walk:
+                    newComment = comment_form.save(commit=False)
+                    newComment.owner = request.user
+                    newComment.walk = walk
+                    newComment.date = timezone.now()
+                    newComment.save()
+        
         #extra image related post
         if 'picture' in request.FILES:
             photo_form = PhotoForm(request.POST, request.FILES)
             if photo_form.is_valid():
                 if walk:
-                    print("heyyyyy")
                     newPhoto = photo_form.save(commit=False)
                     newPhoto.walk = walk
                     newPhoto.owner = request.user
                     newPhoto.date = timezone.now()
                     newPhoto.save()
-                    print(newPhoto)
                     return redirect(reverse('rate_my_walk:more_images', kwargs = {'walk_name_slug': walk_name_slug}))
             else:
                 print(photo_form.errors)
