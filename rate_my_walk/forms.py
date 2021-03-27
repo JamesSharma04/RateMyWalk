@@ -47,19 +47,18 @@ class RatingForm(forms.ModelForm):
 
 class PhotoForm(forms.ModelForm):
     	
-	date = forms.DateField(widget=forms.HiddenInput())
-	picture = forms.ImageField()
+	picture = forms.ImageField(help_text="If you also had a walk at this location you can upload a picture here")
 
 	class Meta:
 		model = Photo
-		exclude = ('walk', 'owner')
+		exclude = ('walk', 'owner', 'date')
 
 class CommentForm(forms.ModelForm):
     title = forms.CharField(max_length=128,
                             help_text = "Please enter the title of your comment")
     comment = forms.CharField(max_length=128,
                               help_text = "Write your comment here")
-    date = forms.DateField(widget=forms.HiddenInput())
+    date = forms.DateField(widget=forms.HiddenInput(), required=False)
     
     class Meta:
         model = Comment

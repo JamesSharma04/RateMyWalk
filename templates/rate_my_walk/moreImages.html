@@ -15,4 +15,18 @@
     </div>
 </div>
 
+<div>
+	{% if images %}
+        <ul>
+            {% for image in images %}
+                <div>
+					<li>
+                        {{ image.picture }}      
+                    </li>
+                </div>
+            {% endfor %}
+		</ul>
+	{% endif %}
+</div>
+
 {% endblock %}

@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from rate_my_walk.models import User, WalkPage, Comment, Photo, Rating
 from rate_my_walk.forms import RatingForm, WalkPageForm, PhotoForm
 #from rate_my_walk.forms import UserForm, WalkPageForm, RatingForm, PhotoForm, CommentForm
+from rate_my_walk.bing_search import run_query
+from django.utils import timezone
+
 
 
 def index(request):
@@ -49,15 +52,48 @@ def showWalk(request, walk_name_slug):
     #     except WalkPage.DoesNotExist:
     #         context_dict['comments'] = None
     
+    result_list = []
+    query=""
+    photo_form = PhotoForm()
+    context_dict['photo_form'] = photo_form
+    
+    if request.method == 'POST':
+        #search related post
+        if 'query' in request.POST:
+            query = request.POST['query'].strip()
+            if query:
+                result_list = run_query(query)
+        
+        #extra image related post
+        if 'picture' in request.FILES:
+            photo_form = PhotoForm(request.POST, request.FILES)
+            if photo_form.is_valid():
+                if walk:
+                    print("heyyyyy")
+                    newPhoto = photo_form.save(commit=False)
+                    newPhoto.walk = walk
+                    newPhoto.owner = request.user
+                    newPhoto.date = timezone.now()
+                    newPhoto.save()
+                    print(newPhoto)
+                    return redirect(reverse('rate_my_walk:more_images', kwargs = {'walk_name_slug': walk_name_slug}))
+            else:
+                print(photo_form.errors)
+            
+        context_dict['result_list'] = result_list
+        context_dict['last_query'] = query
+        context_dict['photo_form'] = photo_form
+
+    
     return render(request, 'rate_my_walk/walk.html', context=context_dict)
     #return HttpResponse("shows the clicked walk, based on slug")
 
 def moreImages(request, walk_name_slug):
     currentWalk = WalkPage.objects.get(slug=walk_name_slug)
-    allImages = Photo.objects.get(walk=currentWalk)
+    allImages = Photo.objects.filter(walk=currentWalk)
     context_dict = {'images': allImages}
     #returns all instances of the photo model. images.picture points to the actial pic
-    return render(request, 'RateMyWalk/moreImages.html', context=context_dict)
+    return render(request, 'rate_my_walk/moreImages.html', context=context_dict)
 
 @login_required()
 def rateWalk(request, walk_name_slug):
@@ -158,7 +194,7 @@ def uploadMorePhotos(request, walk_name_slug):
     if request.method == "POST":
         form = PhotoForm(request.POST, request.FILES)
         
-        if form.isValid():
+        if form.is_valid():
             if walk:
                 photo = form.save(commit=False)
                 photo.walkPage = walk
