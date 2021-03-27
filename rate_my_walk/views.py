@@ -3,8 +3,8 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rate_my_walk.models import User, WalkPage, Rating, Photo, Comment
-from rate_my_walk.forms import RatingForm, WalkPageForm
+from rate_my_walk.models import User, WalkPage, Comment, Photo, Rating
+from rate_my_walk.forms import RatingForm, WalkPageForm, PhotoForm
 #from rate_my_walk.forms import UserForm, WalkPageForm, RatingForm, PhotoForm, CommentForm
 
 
@@ -54,10 +54,10 @@ def showWalk(request, walk_name_slug):
 
 def moreImages(request, walk_name_slug):
     currentWalk = WalkPage.objects.get(slug=walk_name_slug)
-    allImages = Photo.objects.get(walkPage=currentWalk)
+    allImages = Photo.objects.get(walk=currentWalk)
     context_dict = {'images': allImages}
+    #returns all instances of the photo model. images.picture points to the actial pic
     return render(request, 'RateMyWalk/moreImages.html', context=context_dict)
-    return HttpResponse("shows all pictures for one walk based on slug")
 
 @login_required()
 def rateWalk(request, walk_name_slug):
@@ -88,15 +88,15 @@ def rateWalk(request, walk_name_slug):
     ##return HttpResponse("can rate a specific walk on this page based on slug")
 
 @login_required()
-def myAccount(request, username):
-    try:
-        user = User.objects.get(username=username)
-    except User.DoesNotExist:
-        return redirect(reverse('RateMyWalk:index'))
+def myAccount(request):
+    # try:
+    #     user = User.objects.get(username=username)
+    # except User.DoesNotExist:
+    #     return redirect(reverse('RateMyWalk:index'))
     
-    walks = WalkPage.objects.get(user=user)
+    walks = WalkPage.objects.get(owner = request.user)
     
-    context_dict = {'user': user,
+    context_dict = {'username': request.user,
                     'walks': walks,}
     return render(request, 'rate_my_walk/my_profile.html', context=context_dict)
     return HttpResponse("Account details with link to mywalks")
@@ -106,10 +106,12 @@ def uploadWalk(request):
     form = WalkPageForm()
     
     if request.method == "POST":
-        form = WalkPageForm(request.POST)
+        form = WalkPageForm(request.POST, request.FILES)
         
         if form.is_valid():
-            form.save(commit = True)
+            new_walk = form.save(commit=False)
+            new_walk.owner = request.user
+            new_walk.save()
             return redirect(reverse('rate_my_walk:index'))
         else:
             print(form.errors)
@@ -154,13 +156,14 @@ def uploadMorePhotos(request, walk_name_slug):
     form = PhotoForm()
     
     if request.method == "POST":
-        form = PhotoForm(request.POST)
+        form = PhotoForm(request.POST, request.FILES)
         
         if form.isValid():
             if walk:
                 photo = form.save(commit=False)
                 photo.walkPage = walk
-                walk.save()
+                photo.owner = request.user
+                photo.save()
                 return redirect(reverse('RateMyWalk:moreImages', kwargs = {'walk_name_slug': walk_name_slug}))
         else:
             print(form.errors)

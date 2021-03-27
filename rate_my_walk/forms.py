@@ -1,5 +1,5 @@
 from django import forms
-from rate_my_walk.models import WalkPage, Comment, Rating, Photo
+from rate_my_walk.models import WalkPage, Comment, Photo, Rating
 from django.utils import timezone
 
 class WalkPageForm(forms.ModelForm):
@@ -13,56 +13,54 @@ class WalkPageForm(forms.ModelForm):
     end = forms.CharField(max_length=128,
                           help_text = "Enter end location of your walk")
     
-    #how to deal with uploaded pictures in forms?
-    cover = forms.ImageField()
+    cover = forms.ImageField(help_text = "Upload picture of your walk", required=False)
     
-    enjoyment = forms.IntegerField(initial = 0)
-    duration = forms.IntegerField(initial = 0)
-    difficulty = forms.IntegerField(initial = 0)
+    enjoyment = forms.IntegerField(initial = 0,
+                                   help_text = "Rate enjoyment (0-10)",
+                                   max_value = 10,
+                                   min_value = 0)
+    duration = forms.IntegerField(initial = 0,
+                                  help_text = "Rate duration (0-10)",
+                                  max_value = 10,
+                                  min_value = 0)
+    difficulty = forms.IntegerField(initial = 0, help_text = "Rate difficulty (0-10)",
+                                    max_value = 10,
+                                    min_value = 0)
     
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     
-    #how to deal with date fields in forms?
-    #shoud be hidden and it takes current date when creating the object anyways?
-    #date = forms.DateField(timezone.now())
+    date = forms.DateField(widget=forms.HiddenInput)
     
     class Meta:
         model = WalkPage
         fields = ('name', 'desc', 'start', 'end', 'cover', 'enjoyment', 'duration', 'difficulty', )
-        #slug not needed but date?
+
 
 class RatingForm(forms.ModelForm):
-    duration = forms.IntegerField(help_text="Duration", initial = 0)
-    difficulty = forms.IntegerField(help_text="Difficulty", initial = 0)
-    enjoyment = forms.IntegerField(help_text="Enjoyment", initial = 0)
+    duration = forms.IntegerField(help_text="Duration", initial = 0, max_value = 10, min_value = 0)
+    difficulty = forms.IntegerField(help_text="Difficulty", initial = 0, max_value = 10, min_value = 0)
+    enjoyment = forms.IntegerField(help_text="Enjoyment", initial = 0, max_value = 10, min_value = 0)
 
     class Meta:
         model = Rating
         exclude = ('walk',)
-"""
+
 class PhotoForm(forms.ModelForm):
     	
-	date = forms.DateField()
-	owner = forms.CharField(max_length=128)
-	picture = forms.ImageField(upload_to='page_image', blank=True)
+	date = forms.DateField(widget=forms.HiddenInput())
+	picture = forms.ImageField()
 
 	class Meta:
 		model = Photo
-		exclude = ('WalkPage',)
+		exclude = ('walk', 'owner')
 
 class CommentForm(forms.ModelForm):
     title = forms.CharField(max_length=128,
                             help_text = "Please enter the title of your comment")
     comment = forms.CharField(max_length=128,
                               help_text = "Write your comment here")
-    #owner should be pulled automatically somehow
-    owner = forms.CharField(max_length=128)
-    #date also should be automatic
-    date = forms.DateField()
-    #do we need these?
-    url = forms.URLField()
-    views = forms.IntegerField(default=0)
+    date = forms.DateField(widget=forms.HiddenInput())
     
     class Meta:
         model = Comment
-"""
+        exclude = ('owner', 'walk', )

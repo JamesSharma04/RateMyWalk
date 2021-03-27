@@ -7,9 +7,20 @@ from django.utils import timezone
 
 # This model is for walks. It's similar to the Page model, I was just 
 # making this to test the templates.
+
+class UserProfile(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+	##picture = models.ImageField(upload_to='profile_images', blank=True)
+	
+	def __str__(self):
+		return self.user.username
+
+
 class WalkPage(models.Model):
 	NAME_MAX_LENGTH = 128
 	
+	owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='User', null=True)
 	name = models.CharField(max_length=128, unique=True)
 	desc = models.CharField(max_length=2048, unique=True)
 	start = models.CharField(max_length=128, unique=True)
@@ -32,79 +43,38 @@ class WalkPage(models.Model):
 		verbose_name_plural = 'Walks'
 	
 	def __str__(self):
-		return self.name
-
-class Category(models.Model):
-	NAME_MAX_LENGTH = 128
-	
-	name = models.CharField(max_length=128, unique=True)
-	views = models.IntegerField(default=0)
-	likes = models.IntegerField(default=0)
-	slug = models.SlugField(unique=True)
-	
-	def save(self, *args, **kwargs):
-		self.slug = slugify(self.name)
-		super(Category, self).save(*args, **kwargs)
-	
-	class Meta:
-		verbose_name_plural = 'Categories'
-	
-	def __str__(self):
-		return self.name
-"""
-class Page(models.Model):
-	TITLE_MAX_LENGTH = 128
-	URL_MAX_LENGTH = 200
-
-	category = models.ForeignKey(Category, on_delete=models.CASCADE)
-	title = models.CharField(max_length=128)
-	url = models.URLField()
-	views = models.IntegerField(default=0)
-	picture = models.ImageField(upload_to='page_image', blank=True)
-	startPoint = models.CharField(max_length=32)
-	endPoint = models.CharField(max_length=32)
-	
-	def __str__(self):
-		return self.title
-"""
-class UserProfile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-	##picture = models.ImageField(upload_to='profile_images', blank=True)
-	
-	def __str__(self):
-		return self.user.username
-		
+		return self.name		
 		
 class Comment(models.Model):
 	TITLE_MAX_LENGTH = 128
-	URL_MAX_LENGTH = 200
+	URL_MAX_LENGTH = 128
 
-	category = models.ForeignKey(Category, on_delete=models.CASCADE)
+	#category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    
+	owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Owner', null=True)
+	walk = models.ForeignKey(WalkPage, on_delete=models.CASCADE, default=None)
 	title = models.CharField(max_length=128)
-	url = models.URLField()
-	views = models.IntegerField(default=0)
 	comment = models.CharField(max_length=128)
-	owner = models.CharField(max_length=128)
-	date = models.DateField()
+	date = models.DateField(default=timezone.now)
 		
 	def __str__(self):
 		return self.title
-		
+
 class Rating(models.Model):
 
-	walk = models.ForeignKey(WalkPage, on_delete=models.CASCADE)
+	walk = models.ForeignKey(WalkPage, on_delete=models.CASCADE, default=None)
 	duration = models.IntegerField(default=0)
 	difficulty = models.IntegerField(default=0)
 	enjoyment = models.IntegerField(default=0)
 	
 	def __str__(self):
 		return self.enjoyment
-		
+
 class Photo(models.Model):
 	TITLE_MAX_LENGTH = 128
-	URL_MAX_LENGTH = 200
+	URL_MAX_LENGTH = 128
 	
-	date = models.DateField()
-	owner = models.CharField(max_length=128)
-	##picture = models.ImageField(upload_to='page_image', blank=True)
+	walk = models.ForeignKey(WalkPage, on_delete=models.CASCADE, default=None)
+	date = models.DateField(default=timezone.now)
+	owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Uploader', null=True)
+	picture = models.ImageField(upload_to='more_page_image', default='default.jpg')
