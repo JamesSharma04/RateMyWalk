@@ -43,6 +43,7 @@ def showWalk(request, walk_name_slug):
         context_dict['walk'] = walk
     except WalkPage.DoesNotExist:
         context_dict['walk'] = None
+        return redirect(reverse('rate_my_walk:index'))
     
     #get mean user ratings
     ratings = Rating.objects.filter(walk=walk)
@@ -88,7 +89,6 @@ def showWalk(request, walk_name_slug):
         #if post is about comments
         if 'comment' in request.POST and 'title' in request.POST:
             comment_form = CommentForm(request.POST)
-            print(request.POST)
             if comment_form.is_valid():
                 if walk:
                     newComment = comment_form.save(commit=False)
@@ -191,24 +191,25 @@ def editWalk(request, walk_name_slug):
     try:
         walk = WalkPage.objects.get(slug=walk_name_slug)
     except WalkPage.DoesNotExist:
-        walk = None
-    
-    if walk is None:
         redirect('RateMyWalk')
-
-    if request.method == "GET":
-        #extract required infos for auto fill
-        walkName = walk.Name
-        #put extracted infos into context_dict to show in html
-        context_dict = {'walkName': walkName,}
-        #html - <input value="{{walkName}}"/>
-        return render(request, 'RateMyWalk/upload_walk.html', context=context_dict)
     
-    if request.method == "POST":
-        #if walk already exists update it - or delete and create again?
-        #redirect to walkPage
-        return redirect(reverse('RateMyWalk:walk.html', kwargs = {'walk_name_slug': walk_name_slug}))
+    #fill new form with current instance
+    form = WalkPageForm(request.POST or None, instance=walk)
+    
+    #update all fields based on POST
+    if form.is_valid():
+        edit = form.save(commit=False)
+        #update picture if needed
+        if request.FILES:
+            edit.cover = request.FILES['cover']
+        #should we update date too?
+        edit.save()
+        return redirect(reverse('rate_my_walk:index'))
+    
+    context_dict = {'walk': walk,
+                    'form': form}
 
+    return render(request, 'rate_my_walk/editWalk.html', context_dict)     
 
 @login_required()
 def uploadMorePhotos(request, walk_name_slug):

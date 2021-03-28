@@ -16,6 +16,6 @@ urlpatterns = [
     path("walks/<slug:walk_name_slug>/rate-walk/", views.rateWalk, name='rateWalk'),
     # Note: path("walks/upload/", views.uploadWalk, name='uploadWalk') causes error
     path("upload/", views.uploadWalk, name='uploadWalk'),
-    path("walks/<slug:walk_name_slug>/edit/", views.editWalk, name='edit_walk'),
+    path("walks/edit/<slug:walk_name_slug>/", views.editWalk, name='edit_walk'),
     #login urls
 ]
