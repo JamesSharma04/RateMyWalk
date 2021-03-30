@@ -20,9 +20,11 @@
                 {{ hidden }}
             {% endfor %}
             {% for field in form.visible_fields %}
-                {{ field.errors }}
-                {{ field.help_text }}<br />
-                {{ field }}<br />
+                <div class="formBoxes">
+                    {{ field.errors }}
+                    <span class="formHelperText">{{ field.help_text }}<br /></span>
+                    {{ field }}<br /><br />
+                </div>
                 <div class="p-2"></div>
             {% endfor %}
                 <br />

@@ -19,7 +19,7 @@
 
 <main class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
 
       <article class="blog-post">
         <h3>Description</h3>
@@ -54,50 +54,8 @@
         </div>
         
       </article><!-- /.blog-post -->
-
-    </div>
-
-    <div class="col-md-4">
-        <div>
-            <p class="mb-0">Image</p>
-            {{ walk.cover }}
-        </div>
-
-        <div class="py-1 mb-2 bg-dark rounded">
-            <nav class="nav d-flex justify-content-center">
-                <a class="p-2 link-secondary" href="{% url 'rate_my_walk:more_images' walk.slug %}"><p class="navbarText">More Images</p></a>
-            </nav>
-        </div>
-
-        <div class="py-1 mb-2 bg-dark rounded">
-            <nav class="nav d-flex justify-content-center">
-            {% if user.is_authenticated %}
-                <a class="p-2 link-secondary" href="{% url 'rate_my_walk:rateWalk' walk.slug %}"><p class="navbarText">Rate Walk Yourself</p></a>
-            {% else %}
-                 <a class="p-2 link-secondary" id="unauthenticated-user-rating">
-                    <p class="navbarText">Rate Walk Yourself</p>
-                </a>
-            {% endif %}
-            </nav>
-        </div>
-		
-        <div class="py-1 mb-2 bg-dark rounded">
-            <nav class="nav d-flex justify-content-center">
-			{% if user.is_authenticated %}
-                <a class="p-2 link-secondary" href="{% url 'rate_my_walk:edit_walk' walk.slug %}"><p class="navbarText">Edit Walk</p></a>
-            {% endif %}
-            </nav>
-        </div>
-
-
-		
-    </div>
-
-  </div><!-- /.row -->
-  
-  
-  
-      <article class="blog-post">
+        
+    <article class="blog-post">
         <h3>User Ratings</h3>
         <div class="row">
 			{% if difficulty %}
@@ -123,77 +81,82 @@
         
       </article><!-- /.blog-post -->
 
-  
-  
-  <div><!-- all previous comments -->
-	<h3>Comments on this walk</h3>
-	{% if comments %}
-		<ul>
-			{% for comment in comments %}
-				<li>
-					{{comment.owner}} <br />
-					{{comment.date}} <br />
-					{{comment.title}} <br />
-					{{comment.comment}}
-				</li>
-			{% endfor %}
-		</ul>
-	{% else %}
-		<strong>No comments on this walk yet.</strong>
-	{% endif %}
-  </div><!-- /all previous comments -->
-
-
-  <div><!-- add new comment -->
-    <div>
-		<h3>Add your own comment</h3>
-            <form id="comment_form" method="post" action="{% url 'rate_my_walk:showWalk' walk.slug %}", enctype="multipart/form-data">
-            {% csrf_token %}
-            {% for hidden in comment_form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-            {% for field in comment_form.visible_fields %}
-                {{ field.errors }}
-                {{ field.help_text }}<br />
-                {{ field }}<br />
-                <div class="p-2"></div>
-            {% endfor %}
-                <br />
-                <button class="btn btn-primary" type="submit" name="submit">
-                    Upload Comment
-                </button>
-                <div class="p-5"></div>
-        </form>
     </div>
-  </div><!-- /add new comment -->
-  
-  
-  <div><!-- add new photo for more images -->
-    <div>
-		<h3>Add your photo</h3>
-            <form id="photo_form" method="post" action="{% url 'rate_my_walk:showWalk' walk.slug %}", enctype="multipart/form-data">
-            {% csrf_token %}
-            {% for hidden in photo_form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-            {% for field in photo_form.visible_fields %}
-                {{ field.errors }}
-                {{ field.help_text }}<br />
-                {{ field }}<br />
-                <div class="p-2"></div>
-            {% endfor %}
-                <br />
-                <button class="btn btn-primary" type="submit" name="submit">
-                    Upload Picture
-                </button>
-                <div class="p-5"></div>
-        </form>
-    </div>
-  </div><!-- /add new photo for more images -->
 
-  
-  
-  <div><!-- search bar -->
+    <div class="col-md-6">
+        <div>
+            <p class="mb-0">Image</p>
+            <img id="walkImage" src="/static/images/kgPark.jpg" />
+        </div>
+        <br />
+        
+        <div class="col-md-10">
+        <div class="py-1 mb-2 bg-dark rounded">
+            <nav class="nav d-flex justify-content-center">
+                <a class="p-2 link-secondary" href="{% url 'rate_my_walk:more_images' walk.slug %}"><p class="navbarText">More Images</p></a>
+            </nav>
+        </div>
+
+        <div class="py-1 mb-2 bg-dark rounded">
+            <nav class="nav d-flex justify-content-center">
+            {% if user.is_authenticated %}
+                <a class="p-2 link-secondary" href="{% url 'rate_my_walk:rateWalk' walk.slug %}"><p class="navbarText">Rate Walk Yourself</p></a>
+            {% else %}
+                 <a class="p-2 link-secondary" id="unauthenticated-user-rating">
+                    <p class="navbarText">Rate Walk Yourself</p>
+                </a>
+            {% endif %}
+            </nav>
+        </div>
+		
+        <div class="py-1 mb-2 bg-dark rounded">
+            <nav class="nav d-flex justify-content-center">
+			{% if user.is_authenticated %}
+                <a class="p-2 link-secondary" href="{% url 'rate_my_walk:edit_walk' walk.slug %}"><p class="navbarText">Edit Walk</p></a>
+            {% endif %}
+            </nav>
+        </div>
+            
+        </div>
+
+
+		
+    </div>
+
+  </div><!-- /.row -->
+    
+    <div class="row">
+    <div class="col-md-8">
+        
+        <h3>Comments on this walk</h3>
+    <div id="commentScrollbox">
+    <div class="card mb-6">
+        <div class="card-body">
+                {% if comments %}
+                    <ul class="list-group">
+                    {% for comment in comments %}
+                        <li class="list-group-item">
+                            <h5>{{comment.title}}</h5> <br />
+                            <em>{{comment.comment}}</em> <br />
+                    by {{comment.owner}} <br />
+					{{comment.date}}
+                        </li>
+                    {% endfor %}
+      
+                    </ul>
+                {% else %}
+                    <strong>No comments on this walk yet.</strong>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <br />
+    <br />
+    <br />
+    <div><!-- search bar -->
+        
+    <h3>Use this to search for the walk using Google!</h3>
 	<form
 		class="form-inline"
 		id="user-form"
@@ -212,14 +175,9 @@
 		
 		</div>
 		
-		<button
-			class="btn btn-primary"
-			type="submit"
-			name="submit"
-		>
-			Search
-		</button>
-			
+        <button class="py-1 mb-2 bg-dark rounded btn" type="submit" name="submit">
+            <p class="navbarText">Search</p>
+        </button>			
 	</form>
   </div><!-- /search bar -->
 
@@ -247,6 +205,65 @@
 	
   </div><!-- /search results -->
 
+    </div>
+
+    <div class="col-md-4">
+        <div><!-- add new comment -->
+            <h3>Add your own comment</h3>
+            {% if user.is_authenticated %}
+                <form id="comment_form" method="post" action="{% url 'rate_my_walk:showWalk' walk.slug %}", enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for hidden in comment_form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                {% for field in comment_form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}<br />
+                    {{ field }}<br />
+                    <div class="p-2"></div>
+                {% endfor %}
+                    <br />
+                    <button class="py-1 mb-2 bg-dark rounded btn" type="submit" name="submit">
+                        <p class="navbarText">Upload Comment</p>
+                    </button>
+                    <div class="p-5"></div>
+                 </form>
+            {% else %}
+                <strong>You must be logged in to leave a comment.</strong>
+            {% endif %}
+
+        </div><!-- /add new comment -->
+        
+        <div><!-- add new photo for more images -->
+        <div>
+		<h3>Add your photo</h3>
+            {% if user.is_authenticated %}
+                <form id="photo_form" method="post" action="{% url 'rate_my_walk:showWalk' walk.slug %}", enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for hidden in photo_form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                {% for field in photo_form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}<br />
+                    {{ field }}<br />
+                    <div class="p-2"></div>
+                {% endfor %}
+                    <br />
+                    <button class="py-1 mb-2 bg-dark rounded btn" type="submit" name="submit">
+                        <p class="navbarText">Upload Picture</p>
+                    </button>
+                    <div class="p-5"></div>
+            </form>
+            {% else %}
+                <strong>You must be logged in to upload an image.</strong>
+            {% endif %}
+            </div>
+        </div><!-- /add new photo for more images -->
+		
+    </div>
+
+  </div>
 
 </main><!-- /.container -->
 

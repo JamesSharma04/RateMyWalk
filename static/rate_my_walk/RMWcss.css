@@ -15,3 +15,20 @@
     color: white;
     float: right;
 }
+
+.formBoxes {
+    border-style: groove;
+}
+
+.formHelperText {
+
+}
+
+#walkImage {
+    width: 100%;
+}
+
+#commentScrollbox {
+    height: 300px;
+    overflow-y: scroll;
+}

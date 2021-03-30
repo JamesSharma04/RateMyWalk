@@ -6,7 +6,7 @@ class WalkPageForm(forms.ModelForm):
     
     name = forms.CharField(max_length=128,
                            help_text = "Please enter the name of your walk")
-    desc = forms.CharField(max_length=128,
+    desc = forms.CharField(max_length=2048,
                            help_text = "Please write the description of your walk here")
     start = forms.CharField(max_length=128,
                             help_text = "Enter start location of your walk")

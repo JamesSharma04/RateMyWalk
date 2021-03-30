@@ -122,7 +122,7 @@ def showWalk(request, walk_name_slug):
 def moreImages(request, walk_name_slug):
     currentWalk = WalkPage.objects.get(slug=walk_name_slug)
     allImages = Photo.objects.filter(walk=currentWalk)
-    context_dict = {'images': allImages}
+    context_dict = {'images': allImages, 'walk':currentWalk}
     #returns all instances of the photo model. images.picture points to the actial pic
     return render(request, 'rate_my_walk/moreImages.html', context=context_dict)
 
