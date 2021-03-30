@@ -11,12 +11,17 @@
 
 <div class = "jumbotron p-4">
     <div class="container">
-        <h1 class="jumbotron-heading">Rate this Walk</h1>
+        <h1 class="jumbotron-heading">Rate this Walk walk.name </h1>
     </div>
 </div>
 
 <div class="container">
+    <h3>Rate this walk (between 0-10) for the following three conditions.<br /></h3> 
+    <h5>How lengthy this walk was this walk? <br />
+        How difficult was this walk. Was it difficult underfoot? <br />
+        How much did you enjoy the walk in general?</h5> <br />
     <div class="row">
+        <div id="fixedRow">
         <form role="form" id="rateWalk" method="post"
                   action="{% url 'rate_my_walk:rateWalk' walk.slug %}">
             {% csrf_token %}
@@ -24,17 +29,22 @@
                 {{ hidden }}
             {% endfor %}
             {% for field in form.visible_fields %}
-                {{ field.errors }}
-                {{ field.help_text }}<br />
-                {{ field }}<br />
+                <div class="formBoxesHeader bg-dark">
+                    {{ field.errors }}
+                    {{ field.help_text }}<br />
+                </div>
+                <div class="formBoxes">
+                    {{ field }}<br /><br />
+                </div>
                 <div class="p-2"></div>
             {% endfor %}
                 <br />
-                <button class="btn btn-primary" type="submit" name="submit">
-                    Add Rating
+                <button class="py-1 mb-2 bg-dark rounded btn" type="submit" name="submit">
+                    <p class="navbarText">Add Rating</p>
                 </button>
                 <div class="p-5"></div>
         </form>
+        </div>
     </div>
 </div>
 
