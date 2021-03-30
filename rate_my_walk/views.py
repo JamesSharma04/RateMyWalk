@@ -176,7 +176,7 @@ def myAccount(request):
     context_dict = {'username': request.user,
                     'walks': walks,}
     return render(request, 'rate_my_walk/my_profile.html', context=context_dict)
-    return HttpResponse("Account details with link to mywalks")
+    #return HttpResponse("Account details with link to mywalks")
 
 @login_required()
 def uploadWalk(request):

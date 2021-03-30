@@ -40,3 +40,7 @@
 #fixedRow {
     width: 100%;
 }
+
+#usernameHeaderDisplay {
+    padding-right: 20px;
+}
