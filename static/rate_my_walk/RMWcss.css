@@ -1,6 +1,11 @@
+/* For base.html */
 #headerlogo {
     float: left;
     width: 80px;
+}
+
+#usernameHeaderDisplay {
+    padding-right: 20px;
 }
 
 #footer {
@@ -16,6 +21,13 @@
     float: right;
 }
 
+/* For walks.html */
+.scrollbox {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+/* For uploadWalk.html and rateWalk.html */
 .formBoxesHeader {
     border-style: groove;
     padding: 5px;
@@ -26,6 +38,11 @@
 .formBoxes {
     border-style: groove;
     padding: 5px;
+}
+
+/* For walk.html */
+.alignedRating {
+    padding-left: 50px;
 }
 
 #walkImage {
@@ -41,6 +58,3 @@
     width: 100%;
 }
 
-#usernameHeaderDisplay {
-    padding-right: 20px;
-}
