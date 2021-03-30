@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rate_my_walk.models import User, WalkPage, Comment, Photo, Rating
-from rate_my_walk.forms import RatingForm, WalkPageForm, PhotoForm, CommentForm
+from rate_my_walk.forms import RatingForm, WalkPageForm, PhotoForm, CommentForm, DeleteWalkForm
 #from rate_my_walk.forms import UserForm, WalkPageForm, RatingForm, PhotoForm, CommentForm
 from rate_my_walk.bing_search import run_query
 from django.utils import timezone
@@ -70,7 +70,6 @@ def showWalk(request, walk_name_slug):
     all_comments = Comment.objects.filter(walk=walk)
     if all_comments:
         context_dict['comments'] = all_comments
-        
     
     result_list = []
     query=""
@@ -78,6 +77,9 @@ def showWalk(request, walk_name_slug):
     comment_form = CommentForm()
     context_dict['photo_form'] = photo_form
     context_dict['comment_form'] = comment_form
+    
+    delete_form = DeleteWalkForm()
+    context_dict['delete_form'] = delete_form
     
     if request.method == 'POST':
         #search related post
@@ -96,6 +98,9 @@ def showWalk(request, walk_name_slug):
                     newComment.walk = walk
                     newComment.date = timezone.now()
                     newComment.save()
+                    return redirect(reverse('rate_my_walk:showWalk', kwargs={'walk_name_slug': walk_name_slug}))
+            else:
+                print(comment_form.errors)
         
         #extra image related post
         if 'picture' in request.FILES:
@@ -110,6 +115,11 @@ def showWalk(request, walk_name_slug):
                     return redirect(reverse('rate_my_walk:more_images', kwargs = {'walk_name_slug': walk_name_slug}))
             else:
                 print(photo_form.errors)
+        
+        #delete related post
+        if 'slug' in request.POST:
+            walk.delete()
+            return redirect(reverse('rate_my_walk:index'))
             
         context_dict['result_list'] = result_list
         context_dict['last_query'] = query
