@@ -63,3 +63,10 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         exclude = ('owner', 'walk', )
+
+class DeleteWalkForm(forms.ModelForm):
+    slug = forms.SlugField(widget=forms.HiddenInput())
+    
+    class Meta:
+        model = WalkPage
+        fields = ('slug', )
