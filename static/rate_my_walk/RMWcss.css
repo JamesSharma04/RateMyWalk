@@ -16,12 +16,16 @@
     float: right;
 }
 
-.formBoxes {
+.formBoxesHeader {
     border-style: groove;
+    padding: 5px;
+    color:lightgray;
+    border-bottom: none;
 }
 
-.formHelperText {
-
+.formBoxes {
+    border-style: groove;
+    padding: 5px;
 }
 
 #walkImage {
@@ -31,4 +35,8 @@
 #commentScrollbox {
     height: 300px;
     overflow-y: scroll;
+}
+
+#fixedRow {
+    width: 100%;
 }
