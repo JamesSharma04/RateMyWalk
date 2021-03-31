@@ -1,0 +1,30 @@
+{% extends 'rate_my_walk/base.html' %}
+
+{% block title_block %}
+    Register - Walker Profile
+{% endblock %}
+
+{% block body_block %}
+<div class = "jumbotron p-4">
+        <div class="container">
+            <h1 class="jumbotron-heading">Create Walker Profile Here</h1>
+        </div>
+</div>
+
+
+<link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet">
+
+<div class="container">
+   <div class "container">
+		<div class="row">
+			<form method="port"
+				action="{% url 'rate_my_walk:register_profile' %}"
+				enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<input type="submit" value"Create Walker Profile" />
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
