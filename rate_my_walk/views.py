@@ -30,8 +30,13 @@ def about(request):
     #return HttpResponse("about us page")
 
 def walks(request):
-    allWalks = WalkPage.objects.all()
-    context_dict = {'walk_list': allWalks,}
+    allWalks = WalkPage.objects.order_by('-enjoyment')
+    allWalks_duration = WalkPage.objects.order_by('-duration')
+    allWalks_difficulty = WalkPage.objects.order_by('-difficulty')
+
+    context_dict = {'walk_list': allWalks,
+                    'walk_duration': allWalks_duration,
+                    'walk_difficulty': allWalks_difficulty}
     return render(request, 'rate_my_walk/walks.html', context=context_dict)
 
 def showWalk(request, walk_name_slug):

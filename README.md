@@ -4,5 +4,6 @@
 
 * [Authentication](https://github.com/django/django/tree/main/django/contrib/admin/templates/registration)
 
-* [CSS]
-(https://getbootstrap.com/)
+* [CSS](https://getbootstrap.com/)
+
+* [Bing Search API](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-web-search/)
