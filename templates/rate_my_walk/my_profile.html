@@ -39,7 +39,11 @@
 	{% if walks %}
 		<ul>
 		{% for walk in walks %}
-			<div><li> <a href="{% url 'rate_my_walk:showWalk' walk.slug %}">{{ walk.name }}</a> </li></div>
+			<div>
+                <li>
+                    <a href="{% url 'rate_my_walk:showWalk' walk.slug %}">{{ walk.name }}</a>
+                </li>
+            </div>
 		{% endfor %}
 		</ul>
 	{% else %}

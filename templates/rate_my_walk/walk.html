@@ -83,8 +83,7 @@
 
     <div class="col-md-6">
         <div>
-            <p class="mb-0">Image</p>
-            <img id="walkImage" src="/static/images/kgPark.jpg" />
+            <img id="walkImage" src="{{walk.cover.url}}" alt="{{ walk.name }}" />
         </div>
         <br />
         
@@ -111,8 +110,24 @@
         <div class="py-1 mb-2 bg-dark rounded">
             <nav class="nav d-flex justify-content-center">
                 <a class="p-2 link-secondary" href="{% url 'rate_my_walk:edit_walk' walk.slug %}"><p class="navbarText">Edit Walk</p></a>
-            </nav>
-        </div>
+
+				<form id="delete" method="post" action="{% url 'rate_my_walk:showWalk' walk.slug %}", enctype="multipart/form-data">
+				{% csrf_token %}
+				{% for hidden in delete_form.hidden_fields %}
+					{{ hidden }}
+				{% endfor %}
+				{% for field in delete_form.visible_fields %}
+					{{ field.errors }}
+					{{ field.help_text }}
+					{{ field }}
+				{% endfor %}
+					<button class="btn" type="submit" name="submit">
+						<p class="navbarText">Delete Walk</p>
+					</button>
+				</form>
+
+			</nav>
+		</div>
         {% endif %}
             
         </div>
