@@ -59,3 +59,17 @@
     width: 100%;
 }
 
+#moreWalkImage {
+    width: 300px;
+    height: 300px;
+}
+
+#moreWalkText {
+    padding-left: 50px;
+    padding-top: 50px;
+}
+
+#returnToShowWalk {
+    float: right;
+}
+

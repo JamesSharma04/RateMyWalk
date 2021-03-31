@@ -1,4 +1,5 @@
 {% extends 'rate_my_walk/base.html' %}
+{% load staticfiles %}
 
 {% block title_block %}
     Login
@@ -25,7 +26,9 @@
         <input type="password" name="password" id="id_password" class="form-control"
                placeholder="Password" required>
         
-        <button class="btn btn-lg btn-primary" type="submit" value="Log In">Log in</button>
+        <button class="py-1 mb-2 bg-dark rounded btn btn-lg" type="submit" value="Log In">
+            <p class="navbarText">Log in</p>
+        </button>        
     </form>
 </div>
 
