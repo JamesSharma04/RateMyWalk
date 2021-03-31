@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rate_my_walk.models import User, WalkPage, Comment, Photo, Rating
-from rate_my_walk.forms import RatingForm, WalkPageForm, PhotoForm, CommentForm, DeleteWalkForm
+from rate_my_walk.forms import RatingForm, WalkPageForm, PhotoForm, CommentForm, DeleteWalkForm, UserProfileForm
 #from rate_my_walk.forms import UserForm, WalkPageForm, RatingForm, PhotoForm, CommentForm
 from rate_my_walk.bing_search import run_query
 from django.utils import timezone
@@ -252,3 +252,23 @@ def uploadMorePhotos(request, walk_name_slug):
             print(form.errors)
     
     return render(request, 'RateMyWalk/upload_more_photos.html', {'form': form})
+
+@login_required()
+def register_profile(request):
+
+    form = UserProfileForm()
+    
+    if request.method=='POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user=request.user
+            user_profile.save()
+            
+            return redirect(reverse('rate_my_walk:index'))
+        else:
+            # probably better to do soemthing else to make it more intuitive for the user
+            print(form.errors)
+    context_dict={'form': form}
+    return render(request,'rate_my_walk/profile_registration.html', context_dict)

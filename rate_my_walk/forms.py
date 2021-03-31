@@ -1,6 +1,8 @@
 from django import forms
 from rate_my_walk.models import WalkPage, Comment, Photo, Rating
 from django.utils import timezone
+#for userprofile
+from rate_my_walk.models import UserProfile
 
 class WalkPageForm(forms.ModelForm):
     
@@ -70,3 +72,8 @@ class DeleteWalkForm(forms.ModelForm):
     class Meta:
         model = WalkPage
         fields = ('slug', )
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields=('website','picture',)
