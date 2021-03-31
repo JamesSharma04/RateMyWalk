@@ -19,8 +19,6 @@ def generate_users():
     )
     new_user.save()
     # create profile for user
-    p = UserProfile.objects.create(user=new_user)
-    p.save()
 
 def populate():
 
