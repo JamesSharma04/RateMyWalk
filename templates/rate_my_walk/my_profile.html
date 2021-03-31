@@ -15,6 +15,30 @@
 
 <div>
     <h3>Welcome to your account {{ username.username }}</h3>
+	<div class="container">
+		<div class="row">
+		<img src="{{MEDIA_URL }}{{ user_profile.picture }}"
+			width="300"
+			height="300"
+			alt="{{username.username}}'s profile picture" />
+		<br />
+		<div>
+
+			
+			<form method="post" action="." enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.as_p }}
+	
+			<input type="submit" value="Update" />
+			</form>
+
+			<p>
+				<strong>Website:</strong>
+				<a href="{{user_profile.website }}">{{user_profile.website }}</a>
+			</p>
+
+		</div>
+	</div>
     <div class="row">
     <div class="col-md-6">
         <h5>You can change your password here: </h5>

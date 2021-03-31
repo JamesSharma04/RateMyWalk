@@ -19,4 +19,6 @@ urlpatterns = [
     path("walks/edit/<slug:walk_name_slug>/", views.editWalk, name='edit_walk'),
     #profile urls
     path('register_profile/', views.register_profile,name='register_profile'),
+    path('profile/<username>/',views.ProfileView.as_view(),name='profile'),
+    path('walkers/',views.ListWalkersView.as_view(), name='list_walkers'),
 ]
