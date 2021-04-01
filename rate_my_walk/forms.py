@@ -70,3 +70,4 @@ class DeleteWalkForm(forms.ModelForm):
     class Meta:
         model = WalkPage
         fields = ('slug', )
+        
