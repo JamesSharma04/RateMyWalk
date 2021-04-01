@@ -72,12 +72,8 @@ class DeleteWalkForm(forms.ModelForm):
     class Meta:
         model = WalkPage
         fields = ('slug', )
-<<<<<<< HEAD
-        
-=======
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields=('website','picture',)
->>>>>>> d365b49077cdc25f3111fa2a7cd4a355d1e34fdd
