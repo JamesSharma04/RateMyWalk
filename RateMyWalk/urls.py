@@ -18,10 +18,21 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rate_my_walk import views
+#import redux regview and reverse helper
+from registration.backends.simple.views import RegistrationView
+from django.urls import reverse
+
+#Overriding a url in the redux package to redirect users after initial registration
+
+class MyRegistrationView(RegistrationView):
+    def get_success_url(self, user):
+        return reverse('rate_my_walk:register_profile')
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('RateMyWalk/', include('rate_my_walk.urls')),
     path('admin/', admin.site.urls),
+    #get redux package to use overriden class above
+    path('accounts/register/',MyRegistrationView.as_view(),name='registration_register'),
     path('accounts/', include('registration.backends.simple.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

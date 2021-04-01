@@ -1,0 +1,39 @@
+{% extends 'rate_my_walk/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Walkers
+{% endblock %}
+
+{% block body_block %}
+<div class = "jumbotron p-4">
+        <div class="container">
+            <h1 class="jumbotron-heading">Walkers</h1>
+        </div>
+</div>
+
+
+<link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet">
+
+<div class="container">
+	<div class="row">
+		{% if user_profile_list %}
+		<div class="panel-body">
+			<div class="list-group">
+			{% for list_user in user_profile_list %}
+				<div class="list-group-item">
+					<h4 class="list-group-item-heading">
+						<a href="{% url 'RateMyWalk:profile'
+							list_user.user.username %}">
+							{{ list_user.user.username }}
+						</a>
+					</h4>
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+		{% else %}
+		<p>There are no walkers yet.</p>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

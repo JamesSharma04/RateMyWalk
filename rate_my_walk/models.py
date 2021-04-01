@@ -63,12 +63,13 @@ class Comment(models.Model):
 class Rating(models.Model):
 
 	walk = models.ForeignKey(WalkPage, on_delete=models.CASCADE, default=None)
+	rater = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Rater', null=True)
 	duration = models.IntegerField(default=0)
 	difficulty = models.IntegerField(default=0)
 	enjoyment = models.IntegerField(default=0)
 	
 	def __str__(self):
-		return self.enjoyment
+		return str(self.rater) + ": " + str(self.walk)
 
 class Photo(models.Model):
 	TITLE_MAX_LENGTH = 128
@@ -78,3 +79,12 @@ class Photo(models.Model):
 	date = models.DateField(default=timezone.now)
 	owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Uploader', null=True)
 	picture = models.ImageField(upload_to='more_page_image', default='default.jpg')
+
+
+class UserProfile(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    website = models.URLField(blank=True)
+    picture = models.ImageField(upload_to='profile_images',blank=True)
+    
+    def __str__(self):
+        return self.user.username

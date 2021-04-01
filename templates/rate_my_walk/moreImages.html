@@ -17,16 +17,36 @@
 
 <div>
 	{% if images %}
-        <ul>
+        <ul class="list-unstyled">
             {% for image in images %}
-                <div>
+                <div class="row">
 					<li>
-                        <img src="{{ image.picture }}" />
+                        <div class="col-md-4">
+                            <img id="moreWalkImage" src="{{ image.picture.url }}" />
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div class="col-md-8">
+                            <p id="moreWalkText">
+                                Posted by {{ image.owner.username }} 
+                                <em>{{ image.date }}</em>
+                            </p>
+                        </div>
                     </li>
                 </div>
+            <br />
             {% endfor %}
 		</ul>
 	{% endif %}
 </div>
+
+<div class="float-right">
+<div class="py-1 mb-2 bg-dark rounded btn">
+    <nav class="nav d-flex justify-content-center">
+        <a class="p-2 link-secondary" href="{% url 'rate_my_walk:showWalk' walk.slug %}"><p class="navbarText">Return to {{ walk.name }} page</p></a>
+    </nav>
+</div>
+    </div>
 
 {% endblock %}

@@ -3,12 +3,14 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rate_my_walk.models import User, WalkPage, Comment, Photo, Rating
-from rate_my_walk.forms import RatingForm, WalkPageForm, PhotoForm, CommentForm, DeleteWalkForm
+from django.contrib.auth.models import User
+from rate_my_walk.models import User, WalkPage, Comment, Photo, Rating, UserProfile
+from rate_my_walk.forms import RatingForm, WalkPageForm, PhotoForm, CommentForm, DeleteWalkForm, UserProfileForm
 #from rate_my_walk.forms import UserForm, WalkPageForm, RatingForm, PhotoForm, CommentForm
 from rate_my_walk.bing_search import run_query
 from django.utils import timezone
-
+from django.views.generic import View
+from django.utils.decorators import method_decorator
 
 
 def index(request):
@@ -160,6 +162,7 @@ def rateWalk(request, walk_name_slug):
             if walk:
                 rating = form.save(commit = False)
                 rating.walk = walk
+                rating.rater = request.user
                 rating.save()
                 return redirect(reverse('rate_my_walk:showWalk', kwargs = {'walk_name_slug': walk_name_slug}))
         else:
@@ -252,3 +255,79 @@ def uploadMorePhotos(request, walk_name_slug):
             print(form.errors)
     
     return render(request, 'RateMyWalk/upload_more_photos.html', {'form': form})
+
+@login_required()
+def register_profile(request):
+
+    form = UserProfileForm()
+    
+    if request.method=='POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user=request.user
+            user_profile.save()
+            
+            return redirect(reverse('rate_my_walk:index'))
+        else:
+            # probably better to do soemthing else to make it more intuitive for the user
+            print(form.errors)
+    context_dict={'form': form}
+    return render(request,'rate_my_walk/profile_registration.html', context_dict)
+    
+
+class ProfileView(View):
+
+    #helper method
+    def get_user_details(self, username):
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            #will redirect to homepage, could make an error msg 
+            return None
+
+        user_profile = UserProfile.objects.get_or_create(user=user)[0]
+        form = UserProfileForm({'website': user_profile.website,
+                               'picture': user_profile.picture})
+        return (user, user_profile, form)
+
+    #user has to be logged in for both get and post
+    @method_decorator(login_required)
+    def get(self, request, username):
+        try:
+            (user, user_profile, form) = self.get_user_details(username)
+        except TypeError:
+            return redirect(reverse('rate_my_walk:index'))
+
+        context_dict = {'user_profile': user_profile,
+                        'selected_user': user, 'form': form}
+
+        return render(request, 'rate_my_walk/profile.html',
+                      context_dict)
+
+    @method_decorator(login_required)
+    def post(self, request, username):
+        try:
+            (user, user_profile, form) = self.get_user_details(username)
+        except TypeError:
+            return redirect(reverse('rate_my_walk:index'))
+        form = UserProfileForm(request.POST, request.FILES,
+                               instance=user_profile)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('rate_my_walk:profile', user.username)
+        else:
+            print(form.errors)
+
+        context_dict = {'user_profile': user_profile,
+                        'selected_user': user, 'form': form}
+        return render(request, 'rate_my_walk/profile.html',
+                      context_dict)
+class ListWalkersView(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        walkers=UserProfile.objects.all()
+        
+        return render(request,'rate_my_walk/list_walkers.html',{'userprofile_list':walkers})
