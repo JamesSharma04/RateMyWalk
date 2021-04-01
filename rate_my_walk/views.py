@@ -162,6 +162,7 @@ def rateWalk(request, walk_name_slug):
             if walk:
                 rating = form.save(commit = False)
                 rating.walk = walk
+                rating.rater = request.user
                 rating.save()
                 return redirect(reverse('rate_my_walk:showWalk', kwargs = {'walk_name_slug': walk_name_slug}))
         else:

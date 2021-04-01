@@ -69,7 +69,7 @@ class Rating(models.Model):
 	enjoyment = models.IntegerField(default=0)
 	
 	def __str__(self):
-		return self.enjoyment
+		return str(self.rater) + ": " + str(self.walk)
 
 class Photo(models.Model):
 	TITLE_MAX_LENGTH = 128

@@ -45,7 +45,7 @@ class RatingForm(forms.ModelForm):
 
     class Meta:
         model = Rating
-        exclude = ('walk',)
+        exclude = ('walk', 'rater')
 
 class PhotoForm(forms.ModelForm):
     	
