@@ -14,7 +14,7 @@ $(document).ready(function() {
     });
     
     var bgOn;
-    $('a').hover(
+    $('.p-2').hover(
     	function() {
             bgOn = $(this).css('background-color');
     		$(this).css('background-color', 'black');
