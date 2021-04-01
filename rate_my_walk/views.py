@@ -33,12 +33,15 @@ def about(request):
 
 def walks(request):
     allWalks = WalkPage.objects.order_by('-enjoyment')
-    allWalks_duration = WalkPage.objects.order_by('-duration')
-    allWalks_difficulty = WalkPage.objects.order_by('-difficulty')
+    sort = 'enjoyment'
 
+    if 'attribute' in request.POST:
+        attribute = '-' + request.POST['attribute'].lower()
+        allWalks = WalkPage.objects.order_by(attribute)
+        sort = request.POST['attribute'].lower()
     context_dict = {'walk_list': allWalks,
-                    'walk_duration': allWalks_duration,
-                    'walk_difficulty': allWalks_difficulty}
+                    'sort': sort,}
+    
     return render(request, 'rate_my_walk/walks.html', context=context_dict)
 
 def showWalk(request, walk_name_slug):

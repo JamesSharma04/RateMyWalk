@@ -7,16 +7,49 @@
 
 {% block body_block %}
 
+<head><!-- javascript to deal with sorting - should change to JQuery later-->
+	<script>
+		function selectChange(val) {
+			$('#myForm').submit();
+		}
+	</script>
+<head><!-- /javascript -->
+
 <div class = "jumbotron p-4">
     <div class="container">
         <h1 class="jumbotron-heading">Walks</h1>
     </div>
 </div>
 
+
 <div class="scrollbox">
     <div class="card mb-6">
         <div class="card-body">
-            <h5>Title of Walk</h5>
+            <h5>
+				Title of Walk
+			</h5>
+				<form action="{% url 'rate_my_walk:walks' %}" method = "post" id="myForm" align="right">
+					{% csrf_token %}
+						<select id="attribute" name="attribute" onchange="selectChange(this.value)">
+							{% if sort == 'enjoyment' %}
+								<option value="Enjoyment" selected>Enjoyment</option>
+								<option value="Duration">Duration</option>
+								<option value="Difficulty">Difficulty</option>
+							{% endif %}
+							{% if sort == 'duration' %}
+								<option value="Enjoyment">Enjoyment</option>
+								<option value="Duration" selected>Duration</option>
+								<option value="Difficulty">Difficulty</option>
+							{% endif %}
+							{% if sort == 'difficulty' %}
+								<option value="Enjoyment">Enjoyment</option>
+								<option value="Duration">Duration</option>
+								<option value="Difficulty" selected>Difficulty</option>
+							{% endif %}
+
+						</select>
+				</form>
+
                 {% if walk_list %}
                     <ul class="list-group">
                     {% for walk in walk_list %}
@@ -29,7 +62,16 @@
                         
                         <div class="col-md-4">
                         <li class="list-group-item">
-                            {{ walk.enjoyment }}
+							{% if sort == 'enjoyment' %}
+								{{ walk.enjoyment }}
+							{% endif %}
+							{% if sort == 'duration' %}
+								{{ walk.duration }}
+							{% endif %}
+							{% if sort == 'difficulty' %}
+								{{ walk.difficulty }}
+							{% endif %}
+
                         </li>
                         </div>
                     </div>          
