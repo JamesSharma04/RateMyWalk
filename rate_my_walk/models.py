@@ -63,6 +63,7 @@ class Comment(models.Model):
 class Rating(models.Model):
 
 	walk = models.ForeignKey(WalkPage, on_delete=models.CASCADE, default=None)
+	rater = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Rater', null=True)
 	duration = models.IntegerField(default=0)
 	difficulty = models.IntegerField(default=0)
 	enjoyment = models.IntegerField(default=0)
