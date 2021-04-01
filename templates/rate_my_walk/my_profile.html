@@ -1,0 +1,85 @@
+{% extends 'rate_my_walk/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Walks of {{ username }}
+{% endblock %}
+
+{% block body_block %}
+
+<div class = "jumbotron p-4">
+    <div class="container">
+        <h1 class="jumbotron-heading">My Account</h1>
+    </div>
+</div>
+
+<div>
+    <h3>Welcome to your account {{ username.username }}</h3>
+	<div class="container">
+		<div class="row">
+		<img src="{{MEDIA_URL }}{{ user_profile.picture }}"
+			width="300"
+			height="300"
+			alt="{{username.username}}'s profile picture" />
+		<br />
+		<div>
+
+			
+			<form method="post" action="." enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.as_p }}
+	
+			<input type="submit" value="Update" />
+			</form>
+
+			<p>
+				<strong>Website:</strong>
+				<a href="{{user_profile.website }}">{{user_profile.website }}</a>
+			</p>
+
+		</div>
+	</div>
+    <div class="row">
+    <div class="col-md-6">
+        <h5>You can change your password here: </h5>
+    </div>
+    <div class="col-md-4">
+<<<<<<< HEAD
+        <div>
+=======
+        <div class="py-1 mb-2 bg-dark rounded btn">
+>>>>>>> d365b49077cdc25f3111fa2a7cd4a355d1e34fdd
+            <nav class="nav d-flex justify-content-center">
+            	<a class="p-2 link-secondary"></a>
+                <button class="py-1 mb-2 bg-dark rounded btn" type="submit" name="submit" id="change_password" href="{% url 'auth_password_change' %}">
+                    <p class="navbarText">Change Password</p>
+                </button>
+            </nav>
+        </div>
+    </div>
+    </div>
+    
+    <br />
+    <br />
+ 
+</div>
+
+<div>
+    <h5>You may select a walk below and modify or delete the walk.</h5>
+    
+	{% if walks %}
+		<ul>
+		{% for walk in walks %}
+			<div>
+                <li>
+                    <a href="{% url 'rate_my_walk:showWalk' walk.slug %}">{{ walk.name }}</a>
+                </li>
+            </div>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<p><strong>You haven't uploaded any walks yet.</strong></p>
+	{% endif %}
+</div>
+
+{% endblock %}
