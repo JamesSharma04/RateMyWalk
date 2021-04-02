@@ -8,13 +8,14 @@ from django.utils import timezone
 # This model is for walks. It's similar to the Page model, I was just 
 # making this to test the templates.
 
-class UserProfile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
+##commented this out again 
+#class UserProfile(models.Model):
+#	user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 	##picture = models.ImageField(upload_to='profile_images', blank=True)
 	
-	def __str__(self):
-		return self.user.username
+#	def __str__(self):
+#		return self.user.username
 
 
 class WalkPage(models.Model):

@@ -280,6 +280,7 @@ def register_profile(request):
     return render(request,'rate_my_walk/profile_registration.html', context_dict)
     
 
+
 class ProfileView(View):
 
     #helper method
@@ -328,9 +329,10 @@ class ProfileView(View):
                         'selected_user': user, 'form': form}
         return render(request, 'rate_my_walk/profile.html',
                       context_dict)
-class ListWalkersView(View):
+                      
+class ListProfilesView(View):
     @method_decorator(login_required)
     def get(self, request):
-        walkers=UserProfile.objects.all()
-        
-        return render(request,'rate_my_walk/list_walkers.html',{'userprofile_list':walkers})
+        profiles = UserProfile.objects.all()
+
+        return render(request, 'rate_my_walk/list_walkers.html', {'user_profile_list': profiles})
