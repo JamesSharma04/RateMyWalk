@@ -16,6 +16,14 @@
     color: white;
 }
 
+.buttonText{
+    color: white;
+}
+
+#websiteMessage {
+    color: white;
+}
+
 #contact_usFooter{
     color: white;
     float: right;

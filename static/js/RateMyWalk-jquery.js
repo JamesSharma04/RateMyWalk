@@ -13,16 +13,13 @@ $(document).ready(function() {
     		$(this).css('color', 'white');
     });
     
-    var bgOn;
-    $('.p-2').hover(
+    $('#contact_usFooter').hover(
     	function() {
-            bgOn = $(this).css('background-color');
-    		$(this).css('background-color', 'black');
+    		$(this).css('color', 'grey');
     	},
     	function() {
-    		$(this).css('background-color', bgOn);
+    		$(this).css('color', 'white');
     });
-    
     
     $("#top-5-walks").hover(
 		function() {
