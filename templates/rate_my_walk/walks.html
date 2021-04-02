@@ -25,12 +25,16 @@
 <div class="scrollbox">
     <div class="card mb-6">
         <div class="card-body">
+            <div class="row">
+            <div class="col-md-8">
             <h5>
 				Title of Walk
 			</h5>
+            </div>
+            <div class="col-md-4">
 				<form action="{% url 'rate_my_walk:walks' %}" method = "post" id="myForm" align="right">
 					{% csrf_token %}
-						<select id="attribute" name="attribute" onchange="selectChange(this.value)">
+						<select class="py-1 mb-2 bg-dark buttonText rounded btn" id="attribute" name="attribute" onchange="selectChange(this.value)">
 							{% if sort == 'enjoyment' %}
 								<option value="Enjoyment" selected>Enjoyment</option>
 								<option value="Duration">Duration</option>
@@ -49,6 +53,8 @@
 
 						</select>
 				</form>
+                </div>
+            </div>
 
                 {% if walk_list %}
                     <ul class="list-group">

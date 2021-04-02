@@ -16,10 +16,6 @@
     color: white;
 }
 
-.buttonText{
-    color: white;
-}
-
 #websiteMessage {
     color: white;
 }
@@ -63,15 +59,21 @@
     overflow-y: scroll;
 }
 
+.buttonText{
+    color: white;
+}
+
 #fixedRow {
     width: 100%;
 }
 
+/* For uploadWalk.html - and forms */
 #moreWalkImage {
     width: 300px;
     height: 300px;
 }
 
+/* For moreImages.html */
 #moreWalkText {
     padding-left: 50px;
     padding-top: 50px;
@@ -81,6 +83,7 @@
     float: right;
 }
 
+/* For profile.html */
 #updateProfileButton {
     float: right;
 }
