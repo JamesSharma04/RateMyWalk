@@ -19,6 +19,7 @@ $(document).ready(function() {
     	},
     	function() {
     		$(this).css('color', 'white');
+    	}
     });
     
     $("#top-5-walks").hover(
