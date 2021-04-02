@@ -20,5 +20,5 @@ urlpatterns = [
     #profile urls
     path('register_profile/', views.register_profile,name='register_profile'),
     path('profile/<username>/',views.ProfileView.as_view(),name='profile'),
-    path('walkers/',views.ListWalkersView.as_view(), name='list_walkers'),
+    path('walkers/',views.ListProfilesView.as_view(), name='list_walkers'),
 ]
