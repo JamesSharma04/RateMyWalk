@@ -17,10 +17,9 @@
     <h3>Welcome to your account, {{ username.username }}</h3>
 	<div class="container">
 		<div class="row">
-		<img src="{{ user_profile.picture.url }}"
-			width="300"
-			height="300"
-			alt="{{username.username}}'s profile picture" />
+		<img class="profilepic"
+             src="{{ user_profile.picture.url }}" 
+             alt="{{username.username}}'s profile picture" />
 		<br />
 		<div>
 

@@ -74,6 +74,9 @@ class DeleteWalkForm(forms.ModelForm):
         fields = ('slug', )
 
 class UserProfileForm(forms.ModelForm):
+    website = forms.URLField(max_length=128, help_text="Please enter the URL of your social media, such as Facebook")
+    picture = forms.ImageField(help_text="Upload your profile picture here")
+
     class Meta:
         model = UserProfile
         fields=('website','picture',)

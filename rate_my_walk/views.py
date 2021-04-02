@@ -327,7 +327,7 @@ class ProfileView(View):
 
         context_dict = {'user_profile': user_profile,
                         'selected_user': user, 'form': form}
-        return render(request, 'rate_my_walk/profile.html',
+        return render(request, 'rate_my_walk/updateProfile.html',
                       context_dict)
                       
 class ListProfilesView(View):

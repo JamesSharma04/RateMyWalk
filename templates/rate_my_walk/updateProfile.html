@@ -2,22 +2,36 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Upload Walk
+	{% if selected_user == user %}
+		My Account
+	{% else %}
+		Profile for {{ selected_user.username }}
+	{% endif %}
 {% endblock %}
 
 {% block body_block %}
-<div class="jumbotron p-4">
+
+<div class = "jumbotron p-4">
     <div class="container">
-        <h1 class="jumbotron-heading">Upload a Walk</h1>
+		{% if selected_user == user %}
+		<h1 class="jumbotron-heading">Welcome to your account, {{selected_user.username}}</h1>
+		{% else %}
+			<h1 class="jumbotron-heading">{{selected_user.username}}'s Profile</h1>
+		{% endif %}
+        
     </div>
 </div>
 
 <div class="container">
-    <h3>Have you been on walk recently? <br />
-        Tell us about it by completeing the following form.</h3> <br />
+    <h3>Update your profile here.</h3> <br />
+    <h5>The current website linked to your profile: {{ user_profile.website }} <br />
+        Your current profile picture: <img class="profilepic"
+             src="{{ user_profile.picture.url }}" 
+             alt="{{selected_user.username}}'s profile picture" />
+    </h5> <br />
     <div class="row">
         <div id="fixedRow">
-            <form id="walk_form" method="post" action="{% url 'rate_my_walk:uploadWalk' %}", enctype="multipart/form-data">
+            <form method="post" action=".", enctype="multipart/form-data">
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}
@@ -34,11 +48,12 @@
             {% endfor %}
                 <br />
                 <button class="py-1 mb-2 bg-dark rounded btn" type="submit" name="submit">
-                        <p class="buttonText">Upload Walk</p>
+                        <p class="buttonText">Update</p>
                 </button>
                 <div class="p-5"></div>
         </form>
         </div>
     </div>
 </div>
+
 {% endblock %}

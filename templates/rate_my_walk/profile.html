@@ -25,25 +25,29 @@
 <div>
 	<div class="container">
 		<div class="row">
-		<img src="{{ user_profile.picture.url }}"
-			width="300"
-			height="300"
-			alt="{{selected_user.username}}'s profile picture" />
-		<br />
+        
+        {% if user_profile.picture %}
+            <img class="profilepic"
+             src="{{ user_profile.picture.url }}" 
+             alt="{{selected_user.username}}'s profile picture" />
+            <br />
+        {% else %}
+            You dont have a profilepic!
+        {% endif %}
+            
 		<div>
 			{% if selected_user == user %}
 			<form method="post" action="." enctype="multipart/form-data">
-				{% csrf_token %}
-				{{ form.as_p }}
-	
-			<input type="submit" value="Update" />
-			</form>
-			{% else %}
+                {% csrf_token %}
+                <button class="py-1 mb-2 bg-dark rounded btn" id="updateProfileButton" type="submit" name="submit">
+                    <p class="buttonText">Update info</p>
+                </button>
+            </form>
+			{% endif %}
 			<p>
-				<strong>Website:</strong>
+				<strong>Link to {{user_profile.user.username }}'s social media:</strong>
 				<a href="{{user_profile.website }}">{{user_profile.website }}</a>
 			</p>
-			{% endif %}
 		</div>
 	</div>
 	<div>
