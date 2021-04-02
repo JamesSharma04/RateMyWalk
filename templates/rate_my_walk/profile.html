@@ -2,14 +2,23 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Profile for {{ selected_user.username }}
+	{% if selected_user == user %}
+		My Account
+	{% else %}
+		Profile for {{ selected_user.username }}
+	{% endif %}
 {% endblock %}
 
 {% block body_block %}
 
 <div class = "jumbotron p-4">
     <div class="container">
-        <h1 class="jumbotron-heading">{{selected_user.username}}'s Profile</h1>
+		{% if selected_user == user %}
+		<h1 class="jumbotron-heading">Welcome to your account, {{selected_user.username}}</h1>
+		{% else %}
+			<h1 class="jumbotron-heading">{{selected_user.username}}'s Profile</h1>
+		{% endif %}
+        
     </div>
 </div>
 
@@ -37,7 +46,21 @@
 			{% endif %}
 		</div>
 	</div>
-</div>
+	<div>
+		{% if selected_user == user %}
+		    <div class="row">
+			<div class="col-md-6">
+				<h5>You can change your password here: </h5>
+    </div>
+			<div class="col-md-4">
+        <div class="py-1 mb-2 bg-dark rounded">
+            <nav class="nav d-flex justify-content-center">
+                <a class="p-2 link-secondary" href="{% url 'auth_password_change' %}"><p class="navbarText">Change Password</p></a>
+            </nav>
+        </div>
+    </div>
+		</div>
+		{% endif %}
 
 <div>
     <h5>{{selected_user.username}}'s Walks</h5>
