@@ -8,16 +8,6 @@ from django.utils import timezone
 # This model is for walks. It's similar to the Page model, I was just 
 # making this to test the templates.
 
-##commented this out again 
-#class UserProfile(models.Model):
-#	user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-	##picture = models.ImageField(upload_to='profile_images', blank=True)
-	
-#	def __str__(self):
-#		return self.user.username
-
-
 class WalkPage(models.Model):
 	NAME_MAX_LENGTH = 128
 	
@@ -49,8 +39,6 @@ class WalkPage(models.Model):
 class Comment(models.Model):
 	TITLE_MAX_LENGTH = 128
 	URL_MAX_LENGTH = 128
-
-	#category = models.ForeignKey(Category, on_delete=models.CASCADE)
     
 	owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Owner', null=True)
 	walk = models.ForeignKey(WalkPage, on_delete=models.CASCADE, default=None)
