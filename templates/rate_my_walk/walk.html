@@ -88,45 +88,30 @@
         <br />
         
         <div class="col-md-10">
-        <div>
+        <div class="py-1 mb-2 bg-dark rounded">
             <nav class="nav d-flex justify-content-center">
-                <a class="p-2 link-secondary" href="{% url 'rate_my_walk:more_images' walk.slug %}"></a>
-                <button class="py-1 mb-2 bg-dark rounded btn" type="submit" name="submit">
-                    <p class="navbarText">More Images</p>
-                </button>
+                <a class="p-2 link-secondary" href="{% url 'rate_my_walk:more_images' walk.slug %}"><p class="navbarText">More Images</p></a>
             </nav>
-        </div>
-            
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </div>    
 
         <div class="py-1 mb-2 bg-dark rounded">
             <nav class="nav d-flex justify-content-center">
             {% if user.is_authenticated %}
-                     <a class="p-2 link-secondary" href="{% url 'rate_my_walk:rateWalk' walk.slug %}"><p class="navbarText">Rate Walk Yourself</p></a>
-                
+                <a class="p-2 link-secondary" href="{% url 'rate_my_walk:rateWalk' walk.slug %}"><p class="navbarText">Rate Walk Yourself</p></a>
             {% else %}
                  <a class="p-2 link-secondary" id="unauthenticated-user-rating">
-                <button class="py-1 mb-2 bg-dark rounded btn" type="submit" name="submit">
                     <p class="navbarText">Rate Walk Yourself</p>
-                </button>
                 </a>
             {% endif %}
             </nav>
         </div>
 		
         {% if user.is_authenticated and user == walk.owner %}
-        <div>
+        <div class="py-1 mb-2 bg-dark rounded">
             <nav class="nav d-flex justify-content-center">
-                <a class="p-2 link-secondary" href="{% url 'rate_my_walk:edit_walk' walk.slug %}"></a>
-                <button class="py-1 mb-2 bg-dark rounded btn" type="submit" name="submit">
-                    <p class="navbarText">Upload Image</p>
-                </button>
-
                 <a class="p-2 link-secondary" href="{% url 'rate_my_walk:edit_walk' walk.slug %}"><p class="navbarText">Edit Walk</p></a>
-
-				<form id="delete" method="post" action="{% url 'rate_my_walk:showWalk' walk.slug %}", enctype="multipart/form-data">
+                
+                <form id="delete" method="post" action="{% url 'rate_my_walk:showWalk' walk.slug %}", enctype="multipart/form-data">
 				{% csrf_token %}
 				{% for hidden in delete_form.hidden_fields %}
 					{{ hidden }}

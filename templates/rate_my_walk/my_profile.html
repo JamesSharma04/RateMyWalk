@@ -44,12 +44,9 @@
         <h5>You can change your password here: </h5>
     </div>
     <div class="col-md-4">
-        <div>
+        <div class="py-1 mb-2 bg-dark rounded">
             <nav class="nav d-flex justify-content-center">
-            	<a class="p-2 link-secondary"></a>
-                <button class="py-1 mb-2 bg-dark rounded btn" type="submit" name="submit" id="change_password" href="{% url 'auth_password_change' %}">
-                    <p class="navbarText">Change Password</p>
-                </button>
+                <a class="p-2 link-secondary" href="{% url 'auth_password_change' %}"><p class="navbarText">Change Password</p></a>
             </nav>
         </div>
     </div>
