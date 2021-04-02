@@ -49,7 +49,255 @@ def add_user(username,email,password,first_name,last_name):
     u.last_name = last_name
     u.save()
 
-def populate():
+def populateWalks():
+
+
+    kgParkRatingExamples = [
+    {
+    'rater': User.objects.get(username='ryang45'),
+    'duration': 2,
+    'difficulty': 8,
+    'enjoyment': 5},
+    {
+    'rater': User.objects.get(username='zsoltt98'),
+    'duration': 7,
+    'difficulty': 2,
+    'enjoyment': 9},
+    {
+    'rater': User.objects.get(username='paule34'),
+    'duration': 6,
+    'difficulty': 4,
+    'enjoyment': 10}
+    ]
+
+    kwwRatingExamples = [
+    {
+    'rater': User.objects.get(username='ryang45'),
+    'duration': 7,
+    'difficulty': 8,
+    'enjoyment': 2},
+    {
+    'rater': User.objects.get(username='zsoltt98'),
+    'duration': 7,
+    'difficulty': 2,
+    'enjoyment': 5},
+    {
+    'rater': User.objects.get(username='paule34'),
+    'duration': 2,
+    'difficulty': 6,
+    'enjoyment': 5}
+    ]
+
+    bsRatingExamples = [
+    {
+    'rater': User.objects.get(username='ryang45'),
+    'duration': 2,
+    'difficulty': 3,
+    'enjoyment': 5},
+    {
+    'rater': User.objects.get(username='zsoltt98'),
+    'duration': 1,
+    'difficulty': 2,
+    'enjoyment': 7},
+    {
+    'rater': User.objects.get(username='paule34'),
+    'duration': 2,
+    'difficulty': 6,
+    'enjoyment': 3}
+    ]
+
+    ggRatingExamples = [
+    {
+    'rater': User.objects.get(username='ryang45'),
+    'duration': 7,
+    'difficulty': 8,
+    'enjoyment': 2},
+    {
+    'rater': User.objects.get(username='zsoltt98'),
+    'duration': 7,
+    'difficulty': 2,
+    'enjoyment': 5},
+    {
+    'rater': User.objects.get(username='paule34'),
+    'duration': 2,
+    'difficulty': 6,
+    'enjoyment': 5}
+    ]
+
+    rcRatingExamples = [
+    {
+    'rater': User.objects.get(username='ryang45'),
+    'duration': 7,
+    'difficulty': 8,
+    'enjoyment': 8},
+    {
+    'rater': User.objects.get(username='zsoltt98'),
+    'duration': 9,
+    'difficulty': 6,
+    'enjoyment': 3},
+    {
+    'rater': User.objects.get(username='paule34'),
+    'duration': 7,
+    'difficulty': 4,
+    'enjoyment': 5}
+    ]
+
+    gbgRatingExamples = [
+    {
+    'rater': User.objects.get(username='ryang45'),
+    'duration': 4,
+    'difficulty': 5,
+    'enjoyment': 7},
+    {
+    'rater': User.objects.get(username='zsoltt98'),
+    'duration': 1,
+    'difficulty': 3,
+    'enjoyment': 5},
+    {
+    'rater': User.objects.get(username='paule34'),
+    'duration': 2,
+    'difficulty': 3,
+    'enjoyment': 10}
+    ]
+
+    kgParkComments = [
+    {
+    'owner': User.objects.get(username='ryang45'),
+    'title': "Sunset",
+    'comment': "Lovely sunet view from one of the benches up the hill.",
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='zsoltt98'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='jamess12'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='paule34'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    ]
+
+    kwwComments = [
+    {
+    'owner': User.objects.get(username='ryang45'),
+    'title': "Massive walk!",
+    'comment': "Legs exhausted after todays hike.",
+    'date': datetime.strptime('3-27-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='zsoltt98'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('3-24-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='jamess12'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('3-24-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='paule34'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('3-24-21', '%m-%d-%y')},
+    ]
+
+    bsComments = [
+    {
+    'owner': User.objects.get(username='ryang45'),
+    'title': "Singing performer",
+    'comment': "It felt like I was at a concert sitting on those steps at Buchanan Street.",
+    'date': datetime.strptime('3-29-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='zsoltt98'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='jamess12'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='paule34'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    ]
+
+    ggComments = [
+    {
+    'owner': User.objects.get(username='ryang45'),
+    'title': "Jogging",
+    'comment': "Took a jog round this flat park which was fun.",
+    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='zsoltt98'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='jamess12'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='paule34'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    ]
+
+    rcComments = [
+    {
+    'owner': User.objects.get(username='ryang45'),
+    'title': "Windy walk",
+    'comment': "Extremely chilling winds down here, I should've more a jumper.",
+    'date': datetime.strptime('3-20-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='zsoltt98'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='jamess12'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='paule34'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    ]
+
+    gbgComments = [
+    {
+    'owner': User.objects.get(username='ryang45'),
+    'title': "Chilling",
+    'comment': "Me and my friends chilled here today because it was sunny.",
+    'date': datetime.strptime('3-24-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='zsoltt98'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='jamess12'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='paule34'),
+    'title': "#",
+    'comment': "#",
+    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    ]
+
 
     # In media directory
     WalkImageFolder ='page_image'
@@ -65,7 +313,9 @@ def populate():
     'enjoyment':8,
     'duration':3,
     'difficulty':5,
-    'date':datetime.strptime('3-20-21', '%m-%d-%y')},
+    'date':datetime.strptime('3-20-21', '%m-%d-%y'),
+    'userRating':kgParkRatingExamples,
+    'userComment':kgParkComments},
     {
     'user': User.objects.get(username="ryang45"),
     'name': 'Kelvin Walkway',
@@ -76,7 +326,9 @@ def populate():
     'enjoyment':9,
     'duration':5,
     'difficulty':4,
-    'date':datetime.strptime('3-24-21', '%m-%d-%y')},
+    'date':datetime.strptime('3-24-21', '%m-%d-%y'),
+    'userRating':kwwRatingExamples,
+    'userComment':kwwComments},
     {
     'user': User.objects.get(username="ryang45"),
     'name': 'Buchanan Street',
@@ -87,8 +339,10 @@ def populate():
     'enjoyment':6,
     'duration':2,
     'difficulty':2,
-    'date':datetime.strptime('3-22-21', '%m-%d-%y')},
-     {
+    'date':datetime.strptime('3-22-21', '%m-%d-%y'),
+    'userRating':bsRatingExamples,
+    'userComment':bsComments},
+    {
     'user': User.objects.get(username="ryang45"),
     'name': 'Glasgow Green',
     'desc': 'Sunny and bright. Perfect for pints on the grass.',
@@ -98,8 +352,10 @@ def populate():
     'enjoyment':9,
     'duration':5,
     'difficulty':1,
-    'date':datetime.strptime('4-2-21', '%m-%d-%y')},
-     {
+    'date':datetime.strptime('4-2-21', '%m-%d-%y'),
+    'userRating':ggRatingExamples,
+    'userComment':ggComments},
+    {
     'user': User.objects.get(username="ryang45"),
     'name': 'River Clyde',
     'desc': 'Long walk with a nice breeze. Fairly busy.',
@@ -109,8 +365,10 @@ def populate():
     'enjoyment':5,
     'duration':8,
     'difficulty':5,
-    'date':datetime.strptime('3-17-21', '%m-%d-%y')},
-     {
+    'date':datetime.strptime('3-17-21', '%m-%d-%y'),
+    'userRating':rcRatingExamples,
+    'userComment':rcComments},
+    {
     'user': User.objects.get(username="ryang45"),
     'name': 'Glasgow Botanic Gardens',
     'desc': 'Lovely area to view some stunning flowers.',
@@ -120,11 +378,18 @@ def populate():
     'enjoyment':7,
     'duration':2,
     'difficulty':4,
-    'date':datetime.strptime('3-14-21', '%m-%d-%y')},
+    'date':datetime.strptime('3-14-21', '%m-%d-%y'),
+    'userRating':gbgRatingExamples,
+    'userComment':gbgComments},
     ]
-    
+
     for w in walk_examples:
-        add_page(user=w['user'],name=w['name'],desc=w['desc'],start=w['start'],end=w['end'],cover=w['cover'],enjoyment=w['enjoyment'],duration=w['duration'],difficulty=w['difficulty'],date=w['date'])
+        walkObj = add_page(user=w['user'],name=w['name'],desc=w['desc'],start=w['start'],end=w['end'],cover=w['cover'],enjoyment=w['enjoyment'],duration=w['duration'],difficulty=w['difficulty'],date=w['date'])
+        for wr in w['userRating']:
+            add_rates(walk=walkObj,rater=wr['rater'],duration=wr['duration'],difficulty=wr['difficulty'],enjoyment=wr['enjoyment'])
+        for wc in w['userComment']:
+            add_comments(owner=wc['owner'],walk=walkObj,title=wc['title'],comment=wc['comment'],date=wc['date'])
+
 
 def add_page(user,name,desc,start,end,cover,enjoyment=5,duration=5,difficulty=5,date=timezone.now()):
     #[0] returns the object reference only
@@ -141,38 +406,18 @@ def add_page(user,name,desc,start,end,cover,enjoyment=5,duration=5,difficulty=5,
     w.save()
     return w
 
-def makeRatingsForBotanics():
-
-    botanicRatingExamples = [
-    {
-    'walk': WalkPage.objects.get(name='Glasgow Botanic Gardens'),
-    'rater': User.objects.get(username='ryang45'),
-    'duration': 4,
-    'difficulty': 5,
-    'enjoyment': 7},
-    {
-    'walk': WalkPage.objects.get(name='Glasgow Botanic Gardens'),
-    'rater': User.objects.get(username='zsoltt98'),
-    'duration': 1,
-    'difficulty': 3,
-    'enjoyment': 5},
-    {
-    'walk': WalkPage.objects.get(name='Glasgow Botanic Gardens'),
-    'rater': User.objects.get(username='paule34'),
-    'duration': 2,
-    'difficulty': 3,
-    'enjoyment': 10}
-    ]
-
-    for wr in botanicRatingExamples:
-        add_GBGRates(walk=wr['walk'],rater=wr['rater'],duration=wr['duration'],difficulty=wr['difficulty'],enjoyment=wr['enjoyment'])
-
-def add_GBGRates(walk, rater, duration, difficulty, enjoyment):
+def add_rates(walk, rater, duration, difficulty, enjoyment):
     wr = Rating.objects.get_or_create(walk=walk, rater=rater)[0]
     wr.duration = duration
     wr.difficulty = difficulty
     wr.enjoyment = enjoyment
     wr.save()
+
+def add_comments(owner, walk, title, comment, date):
+    wc = Comment.objects.get_or_create(walk=walk, owner=owner, date=date)[0]
+    wc.title = title
+    wc.comment = comment
+    wc.save()
 
 def morePhotosForBotanics():
     moreImagesFolder = 'more_page_image'
@@ -201,8 +446,11 @@ def add_GBGImages(walk, date, owner, picture):
 if __name__=='__main__':
     print('Starting Population Script for RateMyWalk..')
     generate_users()
-    populate()
-    makeRatingsForBotanics()
-    morePhotosForBotanics()
+    populateWalks()
+
+    #add_everything()
+
+    #makeRatingsForBotanics()
+    #morePhotosForBotanics()
     print("Done")
     
