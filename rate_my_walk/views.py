@@ -329,3 +329,20 @@ class ListProfilesView(View):
         profiles = UserProfile.objects.all()
 
         return render(request, 'rate_my_walk/list_walkers.html', {'user_profile_list': profiles})
+        
+class LikeMoreImages(View):
+	@method_decorator(login_required)
+	def get(self, request):
+		image_id = request.GET['image_id']
+		
+		try:
+			more_Images = moreImages.objects.get(id=int(image_id)) 
+		except moreImages.DoesNotExist:
+			return HttpResponse(-1)
+		except ValueError:
+			return HttpResponse(-1)
+			
+		more_Images.likes = more_Images.likes + 1
+		more_Images.save()
+
+		return HttpResponse(more_Images.likes)

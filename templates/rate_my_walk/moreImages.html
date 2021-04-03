@@ -35,9 +35,13 @@
                         </div>
                     </li>
                     
-                    <button class="py-1 mb-2 bg-dark rounded btn" type="like-button" name="like-button" id="like">
-                    <p class="buttonText">Like</p>
-                </button>
+                    <strong id="like_count">{{ moreImages.likes }}</strong> likes
+                    {% if user.is_authenticated %}
+                    <button id="like_btn" class="btn btn-primary btn-sm" type="button">
+                    	<span data-feather="thumbs-up"></span>
+                    	Like Image
+                	</button>
+                	{% endif %}
                 </div>
             <br />
             {% endfor %}
