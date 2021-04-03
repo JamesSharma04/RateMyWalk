@@ -38,7 +38,7 @@
             <ul class="list-unstyled">
                 <li><span data-feather="star"></span>Difficulty: </li>
                 <li><span data-feather="star"></span>Duration: </li>
-                <li><span data-feather="star"></span>How Enoyable: </li>
+                <li><span data-feather="star"></span>How Enjoyable: </li>
             </ul>
             </div>
             
@@ -61,7 +61,7 @@
 				<ul class="list-unstyled">
 					<li><span data-feather="star"></span>Difficulty: </li>
 					<li><span data-feather="star"></span>Duration: </li>
-					<li><span data-feather="star"></span>How Enoyable: </li>
+					<li><span data-feather="star"></span>How Enjoyable: </li>
 				</ul>
 				</div>
 				
@@ -154,7 +154,7 @@
                         <li class="list-group-item">
                             <h5>{{comment.title}}</h5> <br />
                             <em>{{comment.comment}}</em> <br />
-                    by {{comment.owner}} <br />
+                            by <a href="{%url 'rate_my_walk:profile' username=comment.owner %}">{{comment.owner}}</a> <br />
 					{{comment.date}}
                         </li>
                     {% endfor %}

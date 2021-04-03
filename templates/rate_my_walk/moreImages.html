@@ -29,7 +29,7 @@
                     <li>
                         <div class="col-md-8">
                             <p id="moreWalkText">
-                                Posted by {{ image.owner.username }} 
+                                Posted by <a href="{%url 'rate_my_walk:profile' username=image.owner.username %}">{{image.owner.username}}</a>{{ image.owner.username }} 
                                 <em>{{ image.date }}</em>
                             </p>
                         </div>
