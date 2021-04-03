@@ -41,4 +41,8 @@ $(document).ready(function() {
     	return false;
     	}
     });
+	
+	$('#attribute').on('change', function(){
+		$('#sorting').submit();
+	});
 });

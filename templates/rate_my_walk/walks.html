@@ -7,14 +7,6 @@
 
 {% block body_block %}
 
-<head><!-- javascript to deal with sorting - should change to JQuery later-->
-	<script>
-		function selectChange(val) {
-			$('#myForm').submit();
-		}
-	</script>
-<head><!-- /javascript -->
-
 <div class = "jumbotron p-4">
     <div class="container">
         <h1 class="jumbotron-heading">Walks</h1>
@@ -32,9 +24,9 @@
 			</h5>
             </div>
             <div class="col-md-4">
-				<form action="{% url 'rate_my_walk:walks' %}" method = "post" id="myForm" align="right">
+				<form action="{% url 'rate_my_walk:walks' %}" method="post" id="sorting" align="right">
 					{% csrf_token %}
-						<select class="py-1 mb-2 bg-dark buttonText rounded btn" id="attribute" name="attribute" onchange="selectChange(this.value)">
+						<select class="py-1 mb-2 bg-dark buttonText rounded btn" id="attribute" name="attribute">
 							{% if sort == 'enjoyment' %}
 								<option value="Enjoyment" selected>Enjoyment</option>
 								<option value="Duration">Duration</option>
