@@ -63,7 +63,7 @@ def showWalk(request, walk_name_slug):
         for rating in ratings:
             difficulty_sum += rating.difficulty
             duration_sum += rating.duration
-            enjoyment_sum = rating.enjoyment
+            enjoyment_sum += rating.enjoyment
             counter += 1
             
         difficulty_mean = round(difficulty_sum/counter,1)
@@ -223,34 +223,7 @@ def editWalk(request, walk_name_slug):
     context_dict = {'walk': walk,
                     'form': form}
 
-    return render(request, 'rate_my_walk/editWalk.html', context_dict)     
-
-@login_required()
-def uploadMorePhotos(request, walk_name_slug):
-    try:
-        walk = WalkPage.objects.get(slug=walk_name_slug)
-    except WalkPage.DoesNotExist:
-        walk = None
-    
-    if walk is None:
-        return redirect('/RateMyWalk/')
-
-    form = PhotoForm()
-    
-    if request.method == "POST":
-        form = PhotoForm(request.POST, request.FILES)
-        
-        if form.is_valid():
-            if walk:
-                photo = form.save(commit=False)
-                photo.walkPage = walk
-                photo.owner = request.user
-                photo.save()
-                return redirect(reverse('RateMyWalk:moreImages', kwargs = {'walk_name_slug': walk_name_slug}))
-        else:
-            print(form.errors)
-    
-    return render(request, 'RateMyWalk/upload_more_photos.html', {'form': form})
+    return render(request, 'rate_my_walk/editWalk.html', context = context_dict)     
 
 @login_required()
 def register_profile(request):
