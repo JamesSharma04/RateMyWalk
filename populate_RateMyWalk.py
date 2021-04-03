@@ -101,17 +101,17 @@ def populateWalks():
     'rater': User.objects.get(username='ryang45'),
     'duration': 7,
     'difficulty': 8,
-    'enjoyment': 2},
+    'enjoyment': 7},
     {
     'rater': User.objects.get(username='zsoltt98'),
     'duration': 7,
     'difficulty': 2,
-    'enjoyment': 5},
+    'enjoyment': 9},
     {
     'rater': User.objects.get(username='paule34'),
     'duration': 2,
     'difficulty': 6,
-    'enjoyment': 5}
+    'enjoyment': 3}
     ]
 
     bsRatingExamples = [
@@ -137,12 +137,12 @@ def populateWalks():
     'rater': User.objects.get(username='ryang45'),
     'duration': 7,
     'difficulty': 8,
-    'enjoyment': 2},
+    'enjoyment': 9},
     {
     'rater': User.objects.get(username='zsoltt98'),
     'duration': 7,
     'difficulty': 2,
-    'enjoyment': 5},
+    'enjoyment': 7},
     {
     'rater': User.objects.get(username='paule34'),
     'duration': 2,
@@ -178,7 +178,7 @@ def populateWalks():
     'rater': User.objects.get(username='zsoltt98'),
     'duration': 1,
     'difficulty': 3,
-    'enjoyment': 5},
+    'enjoyment': 9},
     {
     'rater': User.objects.get(username='paule34'),
     'duration': 2,
@@ -288,19 +288,19 @@ def populateWalks():
     'date': datetime.strptime('3-20-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='zsoltt98'),
-    'title': "#",
-    'comment': "#",
-    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    'title': "Too windy",
+    'comment': "Sick fed up of being blown along the road. Go somewhere else",
+    'date': datetime.strptime('4-2-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='jamess12'),
-    'title': "#",
-    'comment': "#",
+    'title': "Class walk",
+    'comment': "Ignore the others, this walk was great. Very varied scenery. ",
     'date': datetime.strptime('4-6-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='paule34'),
-    'title': "#",
-    'comment': "#",
-    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    'title': "Decent walk",
+    'comment': "Good view of the skyline",
+    'date': datetime.strptime('4-5-21', '%m-%d-%y')},
     ]
 
     gbgComments = [
