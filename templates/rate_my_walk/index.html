@@ -6,10 +6,6 @@
 {% endblock %}
 
 {% block body_block %}
-	<head>
-		<title></title>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	</head>
 
     <div class="container">
         <div class="row">
@@ -55,9 +51,15 @@
             </div>
             
             <div class="col-md 6">
-            	<div class="w-full text-center">
-            <h1 class="text-4xl">Live Weather App Using jQuery (Open Weather API)</h1>
-        
+            	<h3>Weather</h3>
+            	<div><a href="#" class="get_weather">Get weather</a></div>
+				<div id="result" style="display: none">
+    				<div id="icon"></div>
+					<div id="city"><strong></strong></div>
+					<div id="weather"></div>
+					<div id="time"></div>
+					<div><a href="#" class="hide">Hide</a>
+  				</div>
             </div>
         </div>
     </div>

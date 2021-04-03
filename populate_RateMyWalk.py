@@ -252,7 +252,7 @@ def populateWalks():
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='paule34'),
-    'title': "Big boring",
+    'title': "Bit boring",
     'comment': "No green space, no nature at all apart from the pigeons",
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     ]
@@ -295,12 +295,12 @@ def populateWalks():
     'owner': User.objects.get(username='jamess12'),
     'title': "Class walk",
     'comment': "Ignore the others, this walk was great. Very varied scenery. ",
-    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
+    'date': datetime.strptime('4-5-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='paule34'),
     'title': "Decent walk",
     'comment': "Good view of the skyline",
-    'date': datetime.strptime('4-5-21', '%m-%d-%y')},
+    'date': datetime.strptime('4-6-21', '%m-%d-%y')},
     ]
 
     gbgComments = [
@@ -322,7 +322,7 @@ def populateWalks():
     {
     'owner': User.objects.get(username='paule34'),
     'title': "Rip off",
-    'comment': "Some charlatan charged me a fiver for entry, thought it was free? And the coffee was too expensive to. Don't recommend, walkers",
+    'comment': "Some charlatan charged me a fiver for entry, thought it was free? And the coffee was too expensive too. Don't recommend, walkers",
     'date': datetime.strptime('4-6-21', '%m-%d-%y')},
     ]
 
@@ -337,7 +337,7 @@ def populateWalks():
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='zsoltt98'),
-    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'picture': os.path.join(MoreWalkImageFolder, 'zsolttKGPark.jpg'),
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     ]
 
@@ -348,7 +348,7 @@ def populateWalks():
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='zsoltt98'),
-    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'picture': os.path.join(MoreWalkImageFolder, 'zsolttKWW.jpg'),
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     ]
 
@@ -358,41 +358,41 @@ def populateWalks():
     'picture': os.path.join(MoreWalkImageFolder, 'ryanBS.jpeg'),
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     {
-    'owner': User.objects.get(username='zsoltt98'),
-    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'owner': User.objects.get(username='paule34'),
+    'picture': os.path.join(MoreWalkImageFolder, 'paulBS.jpg'),
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     ]
 
     ggPhotos = [
     {
     'owner': User.objects.get(username='jamess12'),
-    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'picture': os.path.join(MoreWalkImageFolder, 'jamesGG.png'),
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='paule34'),
-    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'picture': os.path.join(MoreWalkImageFolder, 'paulGG.jpg'),
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     ]
 
     rcPhotos = [
     {
     'owner': User.objects.get(username='jamess12'),
-    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'picture': os.path.join(MoreWalkImageFolder, 'jamesRC.jpg'),
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='paule34'),
-    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'picture': os.path.join(MoreWalkImageFolder, 'paulRC.png'),
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     ]
 
     gbgPhotos = [
     {
     'owner': User.objects.get(username='jamess12'),
-    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'picture': os.path.join(MoreWalkImageFolder, 'jamesGBG.jpg'),
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     {
-    'owner': User.objects.get(username='paule34'),
-    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'owner': User.objects.get(username='zsoltt98'),
+    'picture': os.path.join(MoreWalkImageFolder, 'zsolttGBG.jpg'),
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     ]
 
@@ -422,7 +422,7 @@ def populateWalks():
     'desc': 'Had a good time going along the river',
     'start': 'At the skatepark ',
     'end': 'At the botanic gardens',
-    'cover': os.path.join(WalkImageFolder, 'default.jpg'),
+    'cover': os.path.join(WalkImageFolder, 'KWW.jpg'),
     'enjoyment':9,
     'duration':5,
     'difficulty':4,
@@ -436,7 +436,7 @@ def populateWalks():
     'desc': 'Was nice looking at all the shops, saw some buskers. It was raining though.',
     'start': 'At Sauchiehall street by the concert hall ',
     'end': 'At argyle street',
-    'cover': os.path.join(WalkImageFolder, 'default.jpg'),
+    'cover': os.path.join(WalkImageFolder, 'BC.jpg'),
     'enjoyment':6,
     'duration':2,
     'difficulty':2,
@@ -450,7 +450,7 @@ def populateWalks():
     'desc': 'Sunny and bright. Perfect for pints on the grass.',
     'start': 'Saltmarker',
     'end': 'The Green',
-    'cover': os.path.join(WalkImageFolder, 'default.jpg'),
+    'cover': os.path.join(WalkImageFolder, 'GG.jpg'),
     'enjoyment':9,
     'duration':5,
     'difficulty':1,
@@ -464,7 +464,7 @@ def populateWalks():
     'desc': 'Long walk with a nice breeze. Fairly busy.',
     'start': 'Castlebank St',
     'end': 'Clyde St',
-    'cover': os.path.join(WalkImageFolder, 'default.jpg'),
+    'cover': os.path.join(WalkImageFolder, 'RC.jpg'),
     'enjoyment':5,
     'duration':8,
     'difficulty':5,
