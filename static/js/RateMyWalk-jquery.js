@@ -35,6 +35,12 @@ $(document).ready(function() {
     	}
     });
     
+    $("#logout-button").click(function() {
+    	if (!confirm('Are you sure you want to logout?')){
+    	return false;
+    	}
+    });
+    
     jQuery(function($){
 
 	function getWeather(){
