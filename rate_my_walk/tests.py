@@ -78,6 +78,9 @@ def add_comment(owner, walk, title, comment):
 
 class IndexViewTests(TestCase): 
     def test_index_shows_right_data(self):
+        """
+        Checks to make sure that the index page works correctly.
+        """
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='user', email='user@user.com', password='user_password')
@@ -100,6 +103,9 @@ class IndexViewTests(TestCase):
         self.assertEquals(num_recent, 2)
         
     def test_index_view_with_no_walks(self):
+        """
+        Checks to make sure that the index page works correctly if no walks are added.
+        """
         response = self.client.get(reverse('rate_my_walk:index'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'There are no walk present.')
@@ -109,11 +115,17 @@ class IndexViewTests(TestCase):
 
 class AllWalks(TestCase):
     def test_all_wallks_with_no_walks(self):
+        """
+        Checks to make sure that the walks page works correctly if no walks are added.
+        """
         response = self.client.get(reverse('rate_my_walk:walks'))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(response.context['walk_list'], [])
     
     def test_all_walks_with_data(self):
+        """
+        Checks to make sure that the walks page works correctly if walks are present.
+        """
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='user', email='user@user.com', password='user_password')
@@ -137,6 +149,9 @@ class AllWalks(TestCase):
 
 class ShowWalkViewTests(TestCase):
     def test_show_walk_anon_user(self):
+        """
+        Checks to make sure that the walks show correctly if the user is not logged in.
+        """
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='user', email='user@user.com', password='user_password')
@@ -155,6 +170,9 @@ class ShowWalkViewTests(TestCase):
         self.assertContains(response, "You must be logged in to upload an image.")
         
     def test_show_walk_loggedin_user(self):
+        """
+        Checks to make sure that the walks show correctly and the user is able to write comments if the user is logged in.
+        """
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='user', email='user@user.com', password='user_password')
@@ -180,6 +198,9 @@ class ShowWalkViewTests(TestCase):
         self.assertContains(response, "No one rated this walk yet.")
     
     def test_show_walk_loggedin_user_comments_ratings(self):
+        """
+        Checks to make sure that the comments show correctly if they are posted.
+        """
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='user', email='user@user.com', password='user_password')
@@ -215,6 +236,9 @@ class ShowWalkViewTests(TestCase):
     
 class UploadWalkViewTests(TestCase):
     def test_upload_Walk(self):
+        """
+        Checks to make sure that the upload walk page works correctly.
+        """
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='user', email='user@user.com', password='user_password')
@@ -232,6 +256,9 @@ class UploadWalkViewTests(TestCase):
 
 class EditWalkViewTests(TestCase):
     def test_edit_walk(self):
+        """
+        Checks to make sure that the edit walk page works correctly.
+        """
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='user', email='user@user.com', password='user_password')
@@ -252,6 +279,9 @@ class EditWalkViewTests(TestCase):
 
 class RateWalkViewTests(TestCase):
     def test_rate_Walk(self):
+        """
+        Checks to make sure that the rate walk page works correctly.
+        """
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='user', email='user@user.com', password='user_password')
@@ -275,15 +305,26 @@ class RateWalkViewTests(TestCase):
 
 class AboutContactViewTests(TestCase):
     def test_contact_us_page(self):
+        """
+        Checks to make sure that the contact us page loads correctly
+        """
         response = self.client.get(reverse('rate_my_walk:contact_us'))
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "If you have any suggestions on how we can improve our website")
     
     def test_about_page(self):
+        """
+        Checks to make sure that the about us page loads correctly
+        """
         response = self.client.get(reverse('rate_my_walk:about'))
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Our objective is to create a walking social media in Glasgow ")
         
 class MoreImagesViewTests(TestCase):
     def test_more_images_page(self):
+        """
+        Checks to make sure that the more images page loads correctly
+        """
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='user', email='user@user.com', password='user_password')
