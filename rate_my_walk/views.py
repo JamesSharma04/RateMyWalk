@@ -194,7 +194,7 @@ def uploadWalk(request):
             new_walk = form.save(commit=False)
             new_walk.owner = request.user
             new_walk.save()
-            return redirect(reverse('rate_my_walk:index'))
+            return redirect(reverse('rate_my_walk:showWalk', kwargs = {'walk_name_slug': new_walk.slug}))
         else:
             print(form.errors)
     return render(request, 'rate_my_walk/uploadWalk.html', {'form': form})
@@ -269,9 +269,11 @@ class ProfileView(View):
             (user, user_profile, form) = self.get_user_details(username)
         except TypeError:
             return redirect(reverse('rate_my_walk:index'))
+        
+        walks = WalkPage.objects.filter(owner=user)
 
         context_dict = {'user_profile': user_profile,
-                        'selected_user': user, 'form': form}
+                        'selected_user': user, 'form': form, 'walks': walks}
 
         return render(request, 'rate_my_walk/profile.html',
                       context_dict)
