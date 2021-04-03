@@ -219,19 +219,19 @@ def populateWalks():
     'date': datetime.strptime('3-27-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='zsoltt98'),
-    'title': "#",
-    'comment': "#",
+    'title': "Good time on the clyde",
+    'comment': "Saw some ducks",
     'date': datetime.strptime('3-24-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='jamess12'),
-    'title': "#",
-    'comment': "#",
+    'title': "Fun",
+    'comment': "Hadn't been down here before, what a gem",
     'date': datetime.strptime('3-24-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='paule34'),
-    'title': "#",
-    'comment': "#",
-    'date': datetime.strptime('3-24-21', '%m-%d-%y')},
+    'title': "Raining",
+    'comment': "It was wet and cold. Didn't look like the photo you posted.",
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     ]
 
     bsComments = [
@@ -316,13 +316,13 @@ def populateWalks():
     'date': datetime.strptime('4-6-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='jamess12'),
-    'title': "#",
-    'comment': "#",
+    'title': "Brilliant",
+    'comment': "Good to learn about all the plants and that, they have labels which helps",
     'date': datetime.strptime('4-6-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='paule34'),
-    'title': "#",
-    'comment': "#",
+    'title': "Rip off",
+    'comment': "Some charlatan charged me a fiver for entry, thought it was free? And the coffee was too expensive to. Don't recommend, walkers",
     'date': datetime.strptime('4-6-21', '%m-%d-%y')},
     ]
 
