@@ -25,9 +25,11 @@
 						<a href="{% url 'rate_my_walk:profile'
 							list_user.user.username %}">
 							{% if list_user.picture %}
-                            <img src="{{ MEDIA_URL }}{{ list_user.picture }}" width="64" height="64" alt="Profile picture for {{ list_user.username }}" />
+								<img class="profilepic"
+								src="{{ user_profile.picture.url }}" 
+								alt="{{selected_user.username}}'s profile picture" />
                             {% else %}
-                            <img src="https://lorempixel.com/64/64/people/" width="64" height="64" alt="Placeholder image" />
+								<img src="https://lorempixel.com/64/64/people/" width="64" height="64" alt="Placeholder image" />
                             {% endif %}
                             {{ list_user.user.username }}
 							
