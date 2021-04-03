@@ -408,7 +408,7 @@ def populateWalks():
     'desc': 'Lovely walk through the park, saw some ducks',
     'start': 'At the park near Sauchiehall Street',
     'end': 'On Eldon Street near the St Andrews Building',
-    'cover': os.path.join(WalkImageFolder, 'kgPark.jpg'),
+    'cover': os.path.join(WalkImageFolder, 'kgpark.jpg'),
     'enjoyment':8,
     'duration':3,
     'difficulty':5,
