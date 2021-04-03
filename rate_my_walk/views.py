@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from rate_my_walk.models import User, WalkPage, Comment, Photo, Rating, UserProfile
 from rate_my_walk.forms import RatingForm, WalkPageForm, PhotoForm, CommentForm, DeleteWalkForm, UserProfileForm
-#from rate_my_walk.forms import UserForm, WalkPageForm, RatingForm, PhotoForm, CommentForm
 from rate_my_walk.bing_search import run_query
 from django.utils import timezone
 from django.views.generic import View
@@ -24,12 +23,10 @@ def index(request):
 def contact_us(request):
     context_dict = {}
     return render(request, 'rate_my_walk/contact_us.html', context=context_dict)
-    #return HttpResponse("contact us page")
 
 def about(request):
     context_dict = {}
     return render(request, 'rate_my_walk/about.html', context=context_dict)
-    #return HttpResponse("about us page")
 
 def walks(request):
     allWalks = WalkPage.objects.order_by('-enjoyment')
@@ -69,9 +66,9 @@ def showWalk(request, walk_name_slug):
             enjoyment_sum = rating.enjoyment
             counter += 1
             
-        difficulty_mean = difficulty_sum/counter
-        duration_mean = duration_sum/counter
-        enjoyment_mean = enjoyment_sum/counter
+        difficulty_mean = round(difficulty_sum/counter,1)
+        duration_mean = round(duration_sum/counter,1)
+        enjoyment_mean = round(enjoyment_sum/counter,1)
         context_dict['duration'] = duration_mean
         context_dict['difficulty'] = difficulty_mean
         context_dict['enjoyment'] = enjoyment_mean
@@ -137,7 +134,6 @@ def showWalk(request, walk_name_slug):
 
     
     return render(request, 'rate_my_walk/walk.html', context=context_dict)
-    #return HttpResponse("shows the clicked walk, based on slug")
 
 def moreImages(request, walk_name_slug):
     currentWalk = WalkPage.objects.get(slug=walk_name_slug)
@@ -173,7 +169,6 @@ def rateWalk(request, walk_name_slug):
 
     context_dict = {'form': form, 'walk': walk}
     return render(request, 'rate_my_walk/rateWalk.html', context_dict)
-    ##return HttpResponse("can rate a specific walk on this page based on slug")
 
 @login_required()
 def myAccount(request):
@@ -187,7 +182,6 @@ def myAccount(request):
     context_dict = {'username': request.user,
                     'walks': walks,}
     return render(request, 'rate_my_walk/my_profile.html', context=context_dict)
-    #return HttpResponse("Account details with link to mywalks")
 
 @login_required()
 def uploadWalk(request):
@@ -204,7 +198,6 @@ def uploadWalk(request):
         else:
             print(form.errors)
     return render(request, 'rate_my_walk/uploadWalk.html', {'form': form})
-    ##return HttpResponse("form to upload a walk")
 
 @login_required()
 def editWalk(request, walk_name_slug):

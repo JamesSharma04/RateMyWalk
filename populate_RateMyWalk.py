@@ -10,36 +10,48 @@ from rate_my_walk.models import WalkPage, Comment, Rating, Photo, UserProfile
 from django.contrib.auth.models import User
 from datetime import datetime
 
+# Generates Users and creates UserProfiles
 def generate_users():
+    profilePicFolder ='profile_images'
+
     user_examples = [
     {
     'username': 'ryang45',
     'email': 'ryang45@gmail.com',
     'password': 'Qwerty1235',
     'first_name': 'Ryan',
-    'last_name': 'Gregson'},
+    'last_name': 'Gregson',
+    'website': 'https://www.google.com/',
+    'picture': os.path.join(profilePicFolder, 'ryanprofilepic.png')},
     {
     'username': 'jamess12',
     'email': 'jamess12@gmail.com',
     'password': 'Qwerty1236',
     'first_name': 'James',
-    'last_name': 'Sharma'},
+    'last_name': 'Sharma',
+    'website': 'https://www.google.com/',
+    'picture': os.path.join(profilePicFolder, 'myprofilepic.png')},
     {
     'username': 'zsoltt98',
     'email': 'zsoltt98@gmail.com',
     'password': 'Qwerty1237',
     'first_name': 'Zsolt',
-    'last_name': 'Takacs'},
+    'last_name': 'Takacs',
+    'website': 'https://www.google.com/',
+    'picture': os.path.join(profilePicFolder, 'myprofilepic.png')},
     {
     'username': 'paule34',
     'email': 'paule34@gmail.com',
     'password': 'Qwerty1238',
     'first_name': 'Paul',
-    'last_name': 'Ewins'},
+    'last_name': 'Ewins',
+    'website': 'https://www.google.com/',
+    'picture': os.path.join(profilePicFolder, 'myprofilepic.png')},
     ]
 
     for u in user_examples:
-        add_user(username=u['username'],email=u['email'],password=u['password'],first_name=u['first_name'],last_name=u['last_name'])
+        userObj = add_user(username=u['username'],email=u['email'],password=u['password'],first_name=u['first_name'],last_name=u['last_name'])
+        add_userprofile(user=userObj,website=u['website'],picture=u['picture'])
 
 def add_user(username,email,password,first_name,last_name):
     u = User.objects.get_or_create(username=username)[0]
@@ -48,9 +60,23 @@ def add_user(username,email,password,first_name,last_name):
     u.first_name = first_name
     u.last_name = last_name
     u.save()
+    return u
 
+def add_userprofile(user,website,picture):
+    up = UserProfile.objects.get_or_create(user=user)[0]
+    up.website=website
+    up.picture=picture
+    up.save()
+
+
+# Generates walks and fills pages with content
+# First block of lists - walk ratings
+# Second block of lists - walk comments
+# Third block of lists - walk more images
+# Fourth block of lists - walks and their description
 def populateWalks():
 
+    # Walk Ratings
 
     kgParkRatingExamples = [
     {
@@ -159,6 +185,8 @@ def populateWalks():
     'difficulty': 3,
     'enjoyment': 10}
     ]
+
+    # Walk Comments
 
     kgParkComments = [
     {
@@ -298,13 +326,84 @@ def populateWalks():
     'date': datetime.strptime('4-6-21', '%m-%d-%y')},
     ]
 
+    # Walk More Images
+
+    MoreWalkImageFolder ='more_page_image'
+
+    kgParkPhotos = [
+    {
+    'owner': User.objects.get(username='ryang45'),
+    'picture': os.path.join(MoreWalkImageFolder, 'ryanKgPark.jpg'),
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='zsoltt98'),
+    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    ]
+
+    kwwPhotos = [
+    {
+    'owner': User.objects.get(username='ryang45'),
+    'picture': os.path.join(MoreWalkImageFolder, 'ryanKWW.jpg'),
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='zsoltt98'),
+    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    ]
+
+    bsPhotos = [
+    {
+    'owner': User.objects.get(username='ryang45'),
+    'picture': os.path.join(MoreWalkImageFolder, 'ryanBS.jpeg'),
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='zsoltt98'),
+    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    ]
+
+    ggPhotos = [
+    {
+    'owner': User.objects.get(username='jamess12'),
+    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='paule34'),
+    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    ]
+
+    rcPhotos = [
+    {
+    'owner': User.objects.get(username='jamess12'),
+    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='paule34'),
+    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    ]
+
+    gbgPhotos = [
+    {
+    'owner': User.objects.get(username='jamess12'),
+    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    {
+    'owner': User.objects.get(username='paule34'),
+    'picture': os.path.join(MoreWalkImageFolder, 'default.jpg'),
+    'date': datetime.strptime('3-22-21', '%m-%d-%y')},
+    ]
+
+    # Walks
 
     # In media directory
     WalkImageFolder ='page_image'
 
     walk_examples = [
     {
-    'user': User.objects.get(username="ryang45"),
+    'user': User.objects.get(username="zsoltt98"),
     'name': 'Kelvingrove Park',
     'desc': 'Lovely walk through the park, saw some ducks',
     'start': 'At the park near Sauchiehall Street',
@@ -315,72 +414,78 @@ def populateWalks():
     'difficulty':5,
     'date':datetime.strptime('3-20-21', '%m-%d-%y'),
     'userRating':kgParkRatingExamples,
-    'userComment':kgParkComments},
+    'userComment':kgParkComments,
+    'moreImages': kgParkPhotos},
     {
-    'user': User.objects.get(username="ryang45"),
+    'user': User.objects.get(username="jamess12"),
     'name': 'Kelvin Walkway',
     'desc': 'Had a good time going along the river',
     'start': 'At the skatepark ',
     'end': 'At the botanic gardens',
-    'cover': os.path.join(WalkImageFolder, 'kgPark.jpg'),
+    'cover': os.path.join(WalkImageFolder, 'default.jpg'),
     'enjoyment':9,
     'duration':5,
     'difficulty':4,
     'date':datetime.strptime('3-24-21', '%m-%d-%y'),
     'userRating':kwwRatingExamples,
-    'userComment':kwwComments},
+    'userComment':kwwComments,
+    'moreImages':kwwPhotos},
     {
-    'user': User.objects.get(username="ryang45"),
+    'user': User.objects.get(username="jamess12"),
     'name': 'Buchanan Street',
     'desc': 'Was nice looking at all the shops, saw some buskers. It was raining though.',
     'start': 'At Sauchiehall street by the concert hall ',
     'end': 'At argyle street',
-    'cover': os.path.join(WalkImageFolder, 'kgPark.jpg'),
+    'cover': os.path.join(WalkImageFolder, 'default.jpg'),
     'enjoyment':6,
     'duration':2,
     'difficulty':2,
     'date':datetime.strptime('3-22-21', '%m-%d-%y'),
     'userRating':bsRatingExamples,
-    'userComment':bsComments},
+    'userComment':bsComments,
+    'moreImages':bsPhotos},
     {
-    'user': User.objects.get(username="ryang45"),
+    'user': User.objects.get(username="paule34"),
     'name': 'Glasgow Green',
     'desc': 'Sunny and bright. Perfect for pints on the grass.',
     'start': 'Saltmarker',
     'end': 'The Green',
-    'cover': os.path.join(WalkImageFolder, 'kgPark.jpg'),
+    'cover': os.path.join(WalkImageFolder, 'default.jpg'),
     'enjoyment':9,
     'duration':5,
     'difficulty':1,
     'date':datetime.strptime('4-2-21', '%m-%d-%y'),
     'userRating':ggRatingExamples,
-    'userComment':ggComments},
+    'userComment':ggComments,
+    'moreImages':ggPhotos},
     {
-    'user': User.objects.get(username="ryang45"),
+    'user': User.objects.get(username="paule34"),
     'name': 'River Clyde',
     'desc': 'Long walk with a nice breeze. Fairly busy.',
     'start': 'Castlebank St',
     'end': 'Clyde St',
-    'cover': os.path.join(WalkImageFolder, 'kgPark.jpg'),
+    'cover': os.path.join(WalkImageFolder, 'default.jpg'),
     'enjoyment':5,
     'duration':8,
     'difficulty':5,
     'date':datetime.strptime('3-17-21', '%m-%d-%y'),
     'userRating':rcRatingExamples,
-    'userComment':rcComments},
+    'userComment':rcComments,
+    'moreImages':rcPhotos},
     {
     'user': User.objects.get(username="ryang45"),
     'name': 'Glasgow Botanic Gardens',
     'desc': 'Lovely area to view some stunning flowers.',
     'start': 'Great Western Rd',
     'end': 'Ford Rd',
-    'cover': os.path.join(WalkImageFolder, 'kgPark.jpg'),
+    'cover': os.path.join(WalkImageFolder, 'ryanGBG.jpeg'),
     'enjoyment':7,
     'duration':2,
     'difficulty':4,
     'date':datetime.strptime('3-14-21', '%m-%d-%y'),
     'userRating':gbgRatingExamples,
-    'userComment':gbgComments},
+    'userComment':gbgComments,
+    'moreImages':gbgPhotos},
     ]
 
     for w in walk_examples:
@@ -389,12 +494,13 @@ def populateWalks():
             add_rates(walk=walkObj,rater=wr['rater'],duration=wr['duration'],difficulty=wr['difficulty'],enjoyment=wr['enjoyment'])
         for wc in w['userComment']:
             add_comments(owner=wc['owner'],walk=walkObj,title=wc['title'],comment=wc['comment'],date=wc['date'])
-
+        for wp in w['moreImages']:
+            add_moreImages(walk=walkObj,date=wp['date'],owner=wp['owner'],picture=wp['picture'])
 
 def add_page(user,name,desc,start,end,cover,enjoyment=5,duration=5,difficulty=5,date=timezone.now()):
     #[0] returns the object reference only
     w = WalkPage.objects.get_or_create(name=name)[0]
-    w.user = user
+    w.owner = user
     w.desc = desc
     w.start = start
     w.end = end
@@ -419,26 +525,7 @@ def add_comments(owner, walk, title, comment, date):
     wc.comment = comment
     wc.save()
 
-def morePhotosForBotanics():
-    moreImagesFolder = 'more_page_image'
-
-    botanicMorePhotos = [
-    {
-    'walk': WalkPage.objects.get(name='Glasgow Botanic Gardens'),
-    'date': datetime.strptime('3-18-21', '%m-%d-%y'),
-    'owner': User.objects.get(username='jamess12'),
-    'picture': os.path.join(moreImagesFolder, 'default.jpg')},
-    {
-    'walk': WalkPage.objects.get(name='Glasgow Botanic Gardens'),
-    'date': datetime.strptime('3-18-21', '%m-%d-%y'),
-    'owner': User.objects.get(username='zsoltt98'),
-    'picture': os.path.join(moreImagesFolder, 'default.jpg')}
-    ]
-
-    for wp in botanicMorePhotos:
-        add_GBGImages(walk=wp['walk'],date=wp['date'],owner=wp['owner'],picture=wp['picture'])
-
-def add_GBGImages(walk, date, owner, picture):
+def add_moreImages(walk, date, owner, picture):
     wp = Photo.objects.get_or_create(walk=walk, owner=owner, picture=picture)[0]
     wp.date = date
     wp.save()
@@ -447,10 +534,4 @@ if __name__=='__main__':
     print('Starting Population Script for RateMyWalk..')
     generate_users()
     populateWalks()
-
-    #add_everything()
-
-    #makeRatingsForBotanics()
-    #morePhotosForBotanics()
-    print("Done")
-    
+    print("RateMyWalk populated")

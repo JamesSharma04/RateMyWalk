@@ -32,7 +32,7 @@
              alt="{{selected_user.username}}'s profile picture" />
             <br />
         {% else %}
-            You dont have a profilepic!
+            <strong>You don't have a profilepic. Upload one!</strong>
         {% endif %}
             
 		<div>
@@ -44,10 +44,16 @@
                 </button>
             </form>
 			{% endif %}
+            
+            {% if user_profile.website %}
 			<p>
 				<strong>Link to {{user_profile.user.username }}'s social media:</strong>
 				<a href="{{user_profile.website }}">{{user_profile.website }}</a>
 			</p>
+            {% else %}
+            <strong>You don't have any link to your social media. Update your info to include this.</strong>
+            {% endif %}
+            
 		</div>
 	</div>
 	<div>
