@@ -183,7 +183,7 @@ def populateWalks():
     'rater': User.objects.get(username='paule34'),
     'duration': 2,
     'difficulty': 3,
-    'enjoyment': 10}
+    'enjoyment': 2}
     ]
 
     # Walk Comments
@@ -196,18 +196,18 @@ def populateWalks():
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='zsoltt98'),
-    'title': "#",
-    'comment': "#",
+    'title': "Stars",
+    'comment': "There's not much light pollution here so if it's clear a walk at night is nice",
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='jamess12'),
-    'title': "#",
-    'comment': "#",
+    'title': "Good walk",
+    'comment': "Quite often walk through here on the way to the university",
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='paule34'),
-    'title': "#",
-    'comment': "#",
+    'title': "Too busy",
+    'comment': "Saw HUNDREDS of people at the park recently, not socially distancing or anything. ",
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     ]
 
@@ -242,18 +242,18 @@ def populateWalks():
     'date': datetime.strptime('3-29-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='zsoltt98'),
-    'title': "#",
-    'comment': "#",
+    'title': "Good shopping",
+    'comment': "I walked down here, reminicing about the time we had our freedom",
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='jamess12'),
-    'title': "#",
-    'comment': "#",
+    'title': "Fun to walk",
+    'comment': "Because it's so deserted it's actually quite interesting going down here",
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='paule34'),
-    'title': "#",
-    'comment': "#",
+    'title': "Big boring",
+    'comment': "No green space, no nature at all apart from the pigeons",
     'date': datetime.strptime('3-22-21', '%m-%d-%y')},
     ]
 
@@ -265,18 +265,18 @@ def populateWalks():
     'date': datetime.strptime('4-6-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='zsoltt98'),
-    'title': "#",
-    'comment': "#",
+    'title': "Big park",
+    'comment': "Nice to go here after shopping normally, love being in nature",
     'date': datetime.strptime('4-6-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='jamess12'),
-    'title': "#",
-    'comment': "#",
+    'title': "Nice",
+    'comment': "I like how near it is to the river, lovely skyline also",
     'date': datetime.strptime('4-6-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='paule34'),
-    'title': "#",
-    'comment': "#",
+    'title': "Good history",
+    'comment': "The nelson monument in the middle is great, did you know it was struck by lightning soon after construction which put a big crack in the thing?",
     'date': datetime.strptime('4-6-21', '%m-%d-%y')},
     ]
 
@@ -284,7 +284,7 @@ def populateWalks():
     {
     'owner': User.objects.get(username='ryang45'),
     'title': "Windy walk",
-    'comment': "Extremely chilling winds down here, I should've more a jumper.",
+    'comment': "Extremely chilling winds down here, I should've wore a jumper.",
     'date': datetime.strptime('3-20-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='zsoltt98'),
@@ -311,8 +311,8 @@ def populateWalks():
     'date': datetime.strptime('3-24-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='zsoltt98'),
-    'title': "#",
-    'comment': "#",
+    'title': "Lovely greenery",
+    'comment': "Nice to see all the exotic plants around here",
     'date': datetime.strptime('4-6-21', '%m-%d-%y')},
     {
     'owner': User.objects.get(username='jamess12'),
