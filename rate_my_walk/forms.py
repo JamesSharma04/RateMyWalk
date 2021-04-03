@@ -58,7 +58,7 @@ class PhotoForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     title = forms.CharField(max_length=128,
                             help_text = "Please enter the title of your comment")
-    comment = forms.CharField(max_length=128,
+    comment = forms.CharField(max_length=256,
                               help_text = "Write your comment here")
     date = forms.DateField(widget=forms.HiddenInput(), required=False)
     
@@ -75,7 +75,7 @@ class DeleteWalkForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     website = forms.URLField(max_length=128, help_text="Please enter the URL of your social media, such as Facebook")
-    picture = forms.ImageField(help_text="Upload your profile picture here")
+    picture = forms.ImageField(help_text="Upload your profile picture here", required=True)
 
     class Meta:
         model = UserProfile
