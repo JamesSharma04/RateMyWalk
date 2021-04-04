@@ -49,4 +49,16 @@ $(document).ready(function() {
 	$('#attribute').on('change', function(){
 		$('#sorting').submit();
 	});
+    
+    
+    $('.resizeForm').on('keydown input', function() {
+        //Auto-expanding textarea
+        this.style.removeProperty('height');
+        this.style.height = (this.scrollHeight+2) + 'px';
+    }).on('mousedown focus', function() {
+        //Do this on focus, to allow textarea to animate to height...
+        this.style.removeProperty('height');
+        this.style.height = (this.scrollHeight+2) + 'px';
+    });
+    
 });
