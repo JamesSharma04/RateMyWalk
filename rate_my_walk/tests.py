@@ -5,9 +5,7 @@ from django.utils import timezone
 from django.urls import reverse
 from rate_my_walk.views import showWalk, uploadWalk, editWalk, rateWalk, moreImages
 from django.shortcuts import render, redirect
-
-
-# Create your tests here.
+from rate_my_walk.bing_search import read_bing_key, run_query
 
 def add_user(username,email,password,first_name,last_name):
     u = User.objects.get_or_create(username=username)[0]
@@ -18,8 +16,6 @@ def add_user(username,email,password,first_name,last_name):
     u.save()
     
     return u
-
-
     
 class UserTests(TestCase):
     def test_ensure_user_is_created(self):
@@ -33,7 +29,6 @@ class UserTests(TestCase):
         self.assertEqual((user.password =='Test123789'), True)
         self.assertEqual((user.first_name=='Joe'), True)
         self.assertEqual((user.last_name=='Bloggs'), True)
-
 
 #---------View Tests--------------
 #helper function to register a walk
@@ -108,7 +103,7 @@ class IndexViewTests(TestCase):
         """
         response = self.client.get(reverse('rate_my_walk:index'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'There are no walk present.')
+        self.assertContains(response, 'There are no walks present.')
         self.assertQuerysetEqual(response.context['enjoyment'], [])
         self.assertQuerysetEqual(response.context['recent'], [])
     
@@ -148,6 +143,7 @@ class AllWalks(TestCase):
 
 
 class ShowWalkViewTests(TestCase):
+    
     def test_show_walk_anon_user(self):
         """
         Checks to make sure that the walks show correctly if the user is not logged in.
@@ -171,7 +167,7 @@ class ShowWalkViewTests(TestCase):
         
     def test_show_walk_loggedin_user(self):
         """
-        Checks to make sure that the walks show correctly and the user is able to write comments if the user is logged in.
+        Checks to make sure that the walks show correctly and when logged in the user can see more information about commenting
         """
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
@@ -196,6 +192,11 @@ class ShowWalkViewTests(TestCase):
         self.assertContains(response, "Write your comment here")
         self.assertContains(response, "If you also had a walk at this location you can upload a picture here")
         self.assertContains(response, "No one rated this walk yet.")
+        
+        response = showWalk(request, 'error')
+        #Check that putting in a walk that doesn't exist returns a redirect
+        self.assertEqual(response.status_code, 302)
+    
     
     def test_show_walk_loggedin_user_comments_ratings(self):
         """
@@ -219,7 +220,6 @@ class ShowWalkViewTests(TestCase):
         add_comment(request.user, this_walk, "pretty", "very pretty park")
         
         response = self.client.get(reverse('rate_my_walk:showWalk', kwargs={'walk_name_slug': 'newwalk'}))
-
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "6")
         self.assertContains(response, "pretty")
@@ -250,7 +250,7 @@ class UploadWalkViewTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Have you been on walk recently?")
-        self.assertContains(response, "Tell us about it by completeing the following form.")
+        self.assertContains(response, "Tell us about it by completing the following form.")
         self.assertContains(response, "Please enter the name of your walk")
         self.assertContains(response, "Please write the description of your walk here")
 
@@ -258,7 +258,7 @@ class EditWalkViewTests(TestCase):
     def test_edit_walk(self):
         """
         Checks to make sure that the edit walk page works correctly.
-        """
+        """                                     
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='user', email='user@user.com', password='user_password')
@@ -275,6 +275,10 @@ class EditWalkViewTests(TestCase):
         self.assertContains(response, "Please write the description of your walk here")
         self.assertContains(response, "newwalk")
         self.assertContains(response, "this is description")
+        
+        response = editWalk(request, 'error')
+        #Check that putting in a walk that doesn't exist returns a redirect
+        self.assertEqual(response.status_code, 302)
 
 
 class RateWalkViewTests(TestCase):
@@ -302,8 +306,27 @@ class RateWalkViewTests(TestCase):
         self.assertContains(response, "Enjoyment")
         self.assertContains(response, "Difficulty")
         
+        
+        response = rateWalk(request, 'error')
+        #Check that putting in a walk that doesn't exist returns a redirect
+        self.assertEqual(response.status_code, 302)
+        
 
 class AboutContactViewTests(TestCase):
+
+    def test_contact_us_url_exists(self):
+        """
+        Checks to see if the contact us view exists in the correct place, with the correct name.
+        """
+        url = ''
+
+        try:
+            url = reverse('rate_my_walk:contact_us')
+        except:
+            pass
+        self.assertEqual(url, '/RateMyWalk/contact-us/')
+        
+
     def test_contact_us_page(self):
         """
         Checks to make sure that the contact us page loads correctly
@@ -339,7 +362,22 @@ class MoreImagesViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "More images of newwalk")
         
-
+class BingTests(TestCase):
+    def test_read_bing_key(self):
+        """
+        Checks to make sure that bing_search.py gets the correct API key as specified in bing.key
+        """
+        key = read_bing_key()
+        self.assertEqual(key, '4ad55fca778f4dbd8487d5dc26ef773c')
+        
+     
+    def test_bing_results_output(self):
+        """
+        Checks to make sure that the bing search returns the correct search results
+        """
+        results = run_query('google')
+        self.assertEqual(results[0]["title"], 'Google')
+        self.assertEqual(results[0]["link"], 'https://www.google.co.uk/')
 
 
 

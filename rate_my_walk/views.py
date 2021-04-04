@@ -205,7 +205,10 @@ def editWalk(request, walk_name_slug):
     try:
         walk = WalkPage.objects.get(slug=walk_name_slug)
     except WalkPage.DoesNotExist:
-        redirect('RateMyWalk')
+        walk = None
+    
+    if walk is None:
+        return redirect('/RateMyWalk/')
     
     #fill new form with current instance
     form = WalkPageForm(request.POST or None, instance=walk)
