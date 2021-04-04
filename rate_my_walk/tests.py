@@ -5,6 +5,8 @@ from django.utils import timezone
 from django.urls import reverse
 from rate_my_walk.views import showWalk, uploadWalk, editWalk, rateWalk, moreImages
 from django.shortcuts import render, redirect
+from rate_my_walk.bing_search import read_bing_key, run_query
+### Todo: Test like URL, __str__ in models (maybe not necessary?)
 
 
 # Create your tests here.
@@ -219,7 +221,6 @@ class ShowWalkViewTests(TestCase):
         add_comment(request.user, this_walk, "pretty", "very pretty park")
         
         response = self.client.get(reverse('rate_my_walk:showWalk', kwargs={'walk_name_slug': 'newwalk'}))
-
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "6")
         self.assertContains(response, "pretty")
@@ -304,6 +305,20 @@ class RateWalkViewTests(TestCase):
         
 
 class AboutContactViewTests(TestCase):
+
+    def test_contact_us_url_exists(self):
+        """
+        Checks to see if the contact us view exists in the correct place, with the correct name.
+        """
+        url = ''
+
+        try:
+            url = reverse('rate_my_walk:contact_us')
+        except:
+            pass
+        self.assertEqual(url, '/RateMyWalk/contact-us/')
+        
+
     def test_contact_us_page(self):
         """
         Checks to make sure that the contact us page loads correctly
@@ -339,7 +354,22 @@ class MoreImagesViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "More images of newwalk")
         
-
+class BingTests(TestCase):
+    def test_read_bing_key(self):
+        """
+        Checks to make sure that bing_search.py gets the correct API key as specified in bing.key
+        """
+        key = read_bing_key()
+        self.assertEqual(key, '4ad55fca778f4dbd8487d5dc26ef773c')
+        
+     
+    def test_bing_results_output(self):
+        """
+        Checks to make sure that the bing search returns the correct search results
+        """
+        results = run_query('google')
+        self.assertEqual(results[0]["title"], 'Google')
+        self.assertEqual(results[0]["link"], 'https://www.google.co.uk/')
 
 
 
