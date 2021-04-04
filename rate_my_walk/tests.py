@@ -108,7 +108,7 @@ class IndexViewTests(TestCase):
         """
         response = self.client.get(reverse('rate_my_walk:index'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'There are no walk present.')
+        self.assertContains(response, 'There are no walks present.')
         self.assertQuerysetEqual(response.context['enjoyment'], [])
         self.assertQuerysetEqual(response.context['recent'], [])
     
@@ -250,7 +250,7 @@ class UploadWalkViewTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Have you been on walk recently?")
-        self.assertContains(response, "Tell us about it by completeing the following form.")
+        self.assertContains(response, "Tell us about it by completing the following form.")
         self.assertContains(response, "Please enter the name of your walk")
         self.assertContains(response, "Please write the description of your walk here")
 
