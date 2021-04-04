@@ -6,10 +6,6 @@ from django.urls import reverse
 from rate_my_walk.views import showWalk, uploadWalk, editWalk, rateWalk, moreImages
 from django.shortcuts import render, redirect
 from rate_my_walk.bing_search import read_bing_key, run_query
-### Todo: Test like URL, __str__ in models (maybe not necessary?)
-
-
-# Create your tests here.
 
 def add_user(username,email,password,first_name,last_name):
     u = User.objects.get_or_create(username=username)[0]
@@ -20,8 +16,6 @@ def add_user(username,email,password,first_name,last_name):
     u.save()
     
     return u
-
-
     
 class UserTests(TestCase):
     def test_ensure_user_is_created(self):
@@ -35,7 +29,6 @@ class UserTests(TestCase):
         self.assertEqual((user.password =='Test123789'), True)
         self.assertEqual((user.first_name=='Joe'), True)
         self.assertEqual((user.last_name=='Bloggs'), True)
-
 
 #---------View Tests--------------
 #helper function to register a walk
@@ -150,6 +143,7 @@ class AllWalks(TestCase):
 
 
 class ShowWalkViewTests(TestCase):
+    
     def test_show_walk_anon_user(self):
         """
         Checks to make sure that the walks show correctly if the user is not logged in.
@@ -173,7 +167,7 @@ class ShowWalkViewTests(TestCase):
         
     def test_show_walk_loggedin_user(self):
         """
-        Checks to make sure that the walks show correctly and the user is able to write comments if the user is logged in.
+        Checks to make sure that the walks show correctly and when logged in the user can see more information about commenting
         """
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
@@ -198,6 +192,11 @@ class ShowWalkViewTests(TestCase):
         self.assertContains(response, "Write your comment here")
         self.assertContains(response, "If you also had a walk at this location you can upload a picture here")
         self.assertContains(response, "No one rated this walk yet.")
+        
+        response = showWalk(request, 'error')
+        #Check that putting in a walk that doesn't exist returns a redirect
+        self.assertEqual(response.status_code, 302)
+    
     
     def test_show_walk_loggedin_user_comments_ratings(self):
         """
@@ -259,7 +258,7 @@ class EditWalkViewTests(TestCase):
     def test_edit_walk(self):
         """
         Checks to make sure that the edit walk page works correctly.
-        """
+        """                                     
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='user', email='user@user.com', password='user_password')
@@ -276,6 +275,10 @@ class EditWalkViewTests(TestCase):
         self.assertContains(response, "Please write the description of your walk here")
         self.assertContains(response, "newwalk")
         self.assertContains(response, "this is description")
+        
+        response = editWalk(request, 'error')
+        #Check that putting in a walk that doesn't exist returns a redirect
+        self.assertEqual(response.status_code, 302)
 
 
 class RateWalkViewTests(TestCase):
@@ -302,6 +305,11 @@ class RateWalkViewTests(TestCase):
         self.assertContains(response, "Duration")
         self.assertContains(response, "Enjoyment")
         self.assertContains(response, "Difficulty")
+        
+        
+        response = rateWalk(request, 'error')
+        #Check that putting in a walk that doesn't exist returns a redirect
+        self.assertEqual(response.status_code, 302)
         
 
 class AboutContactViewTests(TestCase):
