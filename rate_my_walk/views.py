@@ -308,11 +308,12 @@ class ListProfilesView(View):
 class LikeMoreImages(View):
 	@method_decorator(login_required)
 	def get(self, request):
+		print(request.GET)
 		image_id = request.GET['image_id']
 		
 		try:
-			more_Images = moreImages.objects.get(id=int(image_id)) 
-		except moreImages.DoesNotExist:
+			more_Images = Photo.objects.get(id=int(image_id)) 
+		except Photo.DoesNotExist:
 			return HttpResponse(-1)
 		except ValueError:
 			return HttpResponse(-1)
