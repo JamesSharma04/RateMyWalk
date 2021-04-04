@@ -11,9 +11,6 @@
         </div>
 </div>
 
-
-<link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet">
-
 <div class="container">
 	<div class="row">
 		{% if user_profile_list %}
@@ -23,13 +20,9 @@
 				<div class="list-group-item">
 					<h4 class="list-group-item-heading">
 						<a href="{% url 'rate_my_walk:profile' username=user_profile.user.username%}">
-							{% if user_profile.picture %}
-								<img class="profilepic"
-								src="{{ user_profile.picture.url }}" width="64" height="64"
-								alt="No picture" />
-                            {% else %}
-								<img src="{% static 'images/RMWlogo.jpg' %}" width="64" height="64" alt="Placeholder image" />
-                            {% endif %}
+                            <img class="profilepic"
+                                 src="{{ user_profile.picture.url }}" width="64" height="64"
+                                 alt="No picture" />
                             {{ user_profile.user.username }} - {{ user_profile.website }}
 							
 						</a>

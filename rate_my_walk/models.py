@@ -73,7 +73,7 @@ class Photo(models.Model):
 class UserProfile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     website = models.URLField(blank=True, default='https://google.com')
-    picture = models.ImageField(upload_to='profile_images',blank=True, default='default.jpg')
+    picture = models.ImageField(upload_to='profile_images',blank=True, default='profile_images/default.jpg')
     
     def __str__(self):
         return self.user.username

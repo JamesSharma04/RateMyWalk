@@ -1,10 +1,13 @@
 $(document).ready(function() {
-
     
+    /* Feather icon script for walk.html */
+    feather.replace()
+    
+    /* Informs user they must log in to rate a walk */
     $('#unauthenticated-user-rating').click(function() {
         alert('Please Log In to rate this walk');
     });
-
+    
     $('.navbarText').hover(
     	function() {
     		$(this).css('color', 'grey');
@@ -42,6 +45,7 @@ $(document).ready(function() {
     	}
     });
 	
+    /* Allows walks to be sorted on a condition in walks.html */
 	$('#attribute').on('change', function(){
 		$('#sorting').submit();
 	});
