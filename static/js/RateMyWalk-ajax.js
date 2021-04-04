@@ -2,14 +2,14 @@ $(document).ready(function() {
 
     
     $('#like_btn').click(function(){
-    var moreImagesIdVar;
-    moreImagesIdVar = $(this).attr('data-image_id');
+    	var moreImagesIdVar;
+    	moreImagesIdVar = $(this).attr('data-image_id');
     
-    $.get('/RateMyWalk/like-image/',
-    {'image_id': moreImagesIdVar},
-    function(data) {
-    	$('#like_count').html(data);
-    	$('#like_btn').hide();
-    })
+    	$.get('rate_my_walk/like-image/',
+    		{'data-image_id': moreImagesIdVar},
+    		function(data) {
+    			$('#like_count').html(data);
+    			$('#like_btn').hide();
+    		}
     });
 });
