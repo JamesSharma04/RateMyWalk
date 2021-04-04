@@ -50,13 +50,11 @@ $(document).ready(function() {
 		$('#sorting').submit();
 	});
     
-    
+    /* For resizing form input boxes height */
     $('.resizeForm').on('keydown input', function() {
-        //Auto-expanding textarea
         this.style.removeProperty('height');
         this.style.height = (this.scrollHeight+2) + 'px';
     }).on('mousedown focus', function() {
-        //Do this on focus, to allow textarea to animate to height...
         this.style.removeProperty('height');
         this.style.height = (this.scrollHeight+2) + 'px';
     });
