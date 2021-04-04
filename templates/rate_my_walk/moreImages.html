@@ -35,9 +35,9 @@
                         </div>
                     </li>
                     
-                    <strong id="like_count">{{ moreImages.likes }}</strong> likes
+                    <strong id="like_count">{{ image.likes }}</strong>
                     {% if user.is_authenticated %}
-                    <button id="like_btn" class="btn btn-primary btn-sm" type="button">
+                    <button id="like_btn" data-image_id="{{ image.id }}" class="btn btn-primary btn-sm" type="button">
                     	<span data-feather="thumbs-up"></span>
                     	Like Image
                 	</button>

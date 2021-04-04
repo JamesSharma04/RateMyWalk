@@ -5,11 +5,11 @@ $(document).ready(function() {
     var moreImagesIdVar;
     moreImagesIdVar = $(this).attr('data-image_id');
     
-    $.get('rate_my_walk/like_image/',
-    {'data-image_id': moreImagesIdVar},
+    $.get('/RateMyWalk/like-image/',
+    {'image_id': moreImagesIdVar},
     function(data) {
     	$('#like_count').html(data);
     	$('#like_btn').hide();
-    }
+    })
     });
 });
