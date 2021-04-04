@@ -30,7 +30,7 @@ def generate_users():
     'first_name': 'James',
     'last_name': 'Sharma',
     'website': 'https://www.google.com/',
-    'picture': os.path.join(profilePicFolder, 'myprofilepic.png')},
+    'picture': os.path.join(profilePicFolder, 'jamesprofilepic.png')},
     {
     'username': 'zsoltt98',
     'email': 'zsoltt98@gmail.com',
