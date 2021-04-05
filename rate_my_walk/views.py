@@ -74,7 +74,7 @@ def showWalk(request, walk_name_slug):
         context_dict['enjoyment'] = enjoyment_mean
 
     #get all comments
-    all_comments = Comment.objects.filter(walk=walk)
+    all_comments = Comment.objects.filter(walk=walk).order_by('-date')
     if all_comments:
         context_dict['comments'] = all_comments
     
@@ -137,7 +137,7 @@ def showWalk(request, walk_name_slug):
 
 def moreImages(request, walk_name_slug):
     currentWalk = WalkPage.objects.get(slug=walk_name_slug)
-    allImages = Photo.objects.filter(walk=currentWalk)
+    allImages = Photo.objects.filter(walk=currentWalk).order_by('-date')
     context_dict = {'images': allImages, 'walk':currentWalk}
     #returns all instances of the photo model. images.picture points to the actial pic
     return render(request, 'rate_my_walk/moreImages.html', context=context_dict)
@@ -169,19 +169,6 @@ def rateWalk(request, walk_name_slug):
 
     context_dict = {'form': form, 'walk': walk}
     return render(request, 'rate_my_walk/rateWalk.html', context_dict)
-
-@login_required()
-def myAccount(request):
-    # try:
-    #     user = User.objects.get(username=username)
-    # except User.DoesNotExist:
-    #     return redirect(reverse('RateMyWalk:index'))
-    
-    walks = WalkPage.objects.filter(owner=request.user)
-    
-    context_dict = {'username': request.user,
-                    'walks': walks,}
-    return render(request, 'rate_my_walk/my_profile.html', context=context_dict)
 
 @login_required()
 def uploadWalk(request):
@@ -314,7 +301,7 @@ class LikeWalk(View):
 		walk_id = request.GET['walk_id']
 		
 		try:
-			walk = WalkPage.objects.get(id=int(walk_id))
+			walk = WalkPage.objects.get(id=walk_id)
 		except walk.DoesNotExist:
 			return HttpResponse(-1)
 		except ValueError:
