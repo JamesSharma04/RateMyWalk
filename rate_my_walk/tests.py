@@ -379,8 +379,45 @@ class BingTests(TestCase):
         self.assertEqual(results[0]["title"], 'Google')
         self.assertEqual(results[0]["link"], 'https://www.google.co.uk/')
 
+class RegisterTests(TestCase):
+    
+    def test_register_page(self):
+        """
+        Checks to make sure that the register page returns the correct response
+        """ 
+        #self.factory = RequestFactory()
+        response = self.client.get('/accounts/register/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Enter a secure and memorable password.')
+        self.assertContains(response, 'Already got an account?')
+        
+class LoginTests(TestCase):
 
-
+    def test_login_page(self):
+        """
+        Checks to make sure that the login page returns the correct response
+        """ 
+        #self.factory = RequestFactory()
+        response = self.client.get('/accounts/login/')
+        self.assertContains(response, 'Login')
+        self.assertContains(response, 'Not registered?')
+        self.assertEqual(response.status_code, 200)
+        
+    def test_login_post(self):
+        """
+        Checks to make sure that a user can log in when the correct info is posted
+        """     
+        self.user = User.objects.create_user(
+            username='user', email='user@user.com', password='user_password')
+        response = self.client.post(('/accounts/login/'), data={
+            'username': 'user',
+            'password': 'user_password',
+        }, follow = True)
+        
+        self.assertTrue(response.context['user'].is_active)
+        self.assertEqual(response.status_code, 200)
+        
+        
         
         
 
