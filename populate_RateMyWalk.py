@@ -21,7 +21,7 @@ def generate_users():
     'password': 'Qwerty1235',
     'first_name': 'Ryan',
     'last_name': 'Gregson',
-    'website': 'https://www.google.com/',
+    'website': 'https://github.com/Ryan2469038G',
     'picture': os.path.join(profilePicFolder, 'ryanprofilepic.png')},
     {
     'username': 'jamess12',
