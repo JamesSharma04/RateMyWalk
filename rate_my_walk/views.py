@@ -221,7 +221,7 @@ def editWalk(request, walk_name_slug):
             edit.cover = request.FILES['cover']
         #should we update date too?
         edit.save()
-        return redirect(reverse('rate_my_walk:index'))
+        return redirect(reverse('rate_my_walk:showWalk', kwargs = {'walk_name_slug': walk.slug}))
     
     context_dict = {'walk': walk,
                     'form': form}
@@ -315,7 +315,7 @@ class LikeWalk(View):
 		
 		try:
 			walk = WalkPage.objects.get(id=int(walk_id))
-		except Walk.DoesNotExist:
+		except walk.DoesNotExist:
 			return HttpResponse(-1)
 		except ValueError:
 			return HttpResponse(-1)
