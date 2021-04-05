@@ -72,7 +72,6 @@ class Photo(models.Model):
 	date = models.DateField(default=timezone.now)
 	owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Uploader', null=True)
 	picture = models.ImageField(upload_to='more_page_image', default='default.jpg')
-	likes = models.IntegerField(default=0)
 
 class UserProfile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
