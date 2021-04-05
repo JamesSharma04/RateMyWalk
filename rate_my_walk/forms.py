@@ -9,11 +9,14 @@ class WalkPageForm(forms.ModelForm):
     name = forms.CharField(max_length=128,
                            help_text = "Please enter the name of your walk")
     desc = forms.CharField(max_length=2048,
-                           help_text = "Please write the description of your walk here")
+                           help_text = "Please write the description of your walk here",
+                           widget=forms.Textarea(attrs={'class': 'resizeForm'}))
     start = forms.CharField(max_length=128,
-                            help_text = "Enter start location of your walk")
+                            help_text = "Enter start location of your walk",
+                            widget=forms.Textarea(attrs={'class': 'resizeForm'}))
     end = forms.CharField(max_length=128,
-                          help_text = "Enter end location of your walk")
+                          help_text = "Enter end location of your walk",
+                          widget=forms.Textarea(attrs={'class': 'resizeForm'}))
     
     cover = forms.ImageField(help_text = "Upload picture of your walk", required=False)
     
@@ -59,7 +62,8 @@ class CommentForm(forms.ModelForm):
     title = forms.CharField(max_length=128,
                             help_text = "Please enter the title of your comment")
     comment = forms.CharField(max_length=256,
-                              help_text = "Write your comment here")
+                              help_text = "Write your comment here",
+                              widget=forms.Textarea(attrs={'class': 'resizeForm'}))
     date = forms.DateField(widget=forms.HiddenInput(), required=False)
     
     class Meta:
@@ -74,7 +78,9 @@ class DeleteWalkForm(forms.ModelForm):
         fields = ('slug', )
 
 class UserProfileForm(forms.ModelForm):
-    website = forms.URLField(max_length=128, help_text="Please enter the URL of your social media, such as Facebook")
+    website = forms.URLField(max_length=128, 
+                             help_text="Please enter the URL of your social media, such as Facebook",
+                             widget=forms.Textarea(attrs={'class': 'resizeForm'}))
     picture = forms.ImageField(help_text="Upload your profile picture here", required=True)
 
     class Meta:
