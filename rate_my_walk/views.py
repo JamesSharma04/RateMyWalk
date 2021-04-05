@@ -314,7 +314,7 @@ class LikeWalk(View):
 		walk_id = request.GET['walk_id']
 		
 		try:
-			walk = WalkPage.objects.get(id=int(walk_id)) 
+			walk = WalkPage.objects.get(id=int(walk_id))
 		except Walk.DoesNotExist:
 			return HttpResponse(-1)
 		except ValueError:

@@ -22,7 +22,5 @@ urlpatterns = [
     path('profile/<username>/',views.ProfileView.as_view(),name='profile'),
     path('walkers/',views.ListProfilesView.as_view(), name='list_walkers'),
     #like button url
-    # path("walks/<slug:walk_name_slug>/more-images/like", views.LikeImage, name='likeButton'),
-    #path('walks/<slug:walk_name_slug>/more-images/like/', views.LikeMoreImages.as_view(), name='like_image'),
     path('like_walk/', views.LikeWalk.as_view(), name='like_walk'),
 ]
