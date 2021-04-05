@@ -21,7 +21,7 @@ def generate_users():
     'password': 'Qwerty1235',
     'first_name': 'Ryan',
     'last_name': 'Gregson',
-    'website': 'https://github.com/Ryan2469038G',
+    'website': 'https://www.github.com/Ryan2469038G',
     'picture': os.path.join(profilePicFolder, 'ryanprofilepic.png')},
     {
     'username': 'jamess12',
@@ -29,7 +29,7 @@ def generate_users():
     'password': 'Qwerty1236',
     'first_name': 'James',
     'last_name': 'Sharma',
-    'website': 'https://www.google.com/',
+    'website': 'https://www.github.com/JamesSharma04',
     'picture': os.path.join(profilePicFolder, 'jamesprofilepic.png')},
     {
     'username': 'zsoltt98',
@@ -37,7 +37,7 @@ def generate_users():
     'password': 'Qwerty1237',
     'first_name': 'Zsolt',
     'last_name': 'Takacs',
-    'website': 'https://www.google.com/',
+    'website': 'https://www.github.com/2472886T',
     'picture': os.path.join(profilePicFolder, 'myprofilepic.png')},
     {
     'username': 'paule34',
@@ -45,7 +45,7 @@ def generate_users():
     'password': 'Qwerty1238',
     'first_name': 'Paul',
     'last_name': 'Ewins',
-    'website': 'https://www.google.com/',
+    'website': 'https://www.github.com/polewins',
     'picture': os.path.join(profilePicFolder, 'myprofilepic.png')},
     ]
 
