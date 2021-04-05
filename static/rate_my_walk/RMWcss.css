@@ -73,6 +73,11 @@
     height: 300px;
 }
 
+.resizeForm {
+    width:175px;
+    height:30px;
+}
+
 /* For moreImages.html */
 #moreWalkText {
     padding-left: 50px;
@@ -92,11 +97,3 @@
     width: 300px;
     height: 300px;
 }
-
-.resizeForm {
-    width:175px;
-    height:30px;
-}
-
-
-
