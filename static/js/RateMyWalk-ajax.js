@@ -1,10 +1,10 @@
 $(document).ready(function() {
 	$('#like_btn').click(function(){
-    	var moreImagesIdVar;
-    	moreImagesIdVar = $(this).attr('data-image_id');
+    	var walkIdVar;
+    	walkIdVar = $(this).attr('data-walk_id');
     
-    	$.get('/RateMyWalk/like_image/',
-    		{'image_id': moreImagesIdVar},
+    	$.get('/RateMyWalk/like_walk/',
+    		{'walk_id': walkIdVar},
     		function(data) {
     			$('#like_count').html(data);
     			$('#like_btn').hide();

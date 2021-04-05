@@ -105,6 +105,19 @@
             {% endif %}
             </nav>
         </div>
+        
+        <div>
+            <strong id="like_count">{{ walk.likes }}</strong> likes
+            {% if user.is_authenticated %}
+            <button id="like_btn"
+            		data-walk_id="{{ walk.id }}"
+            		class="btn btn-primary btn-sm"
+            		type="button">
+                <span data-feather="thumbs-up"></span>
+                Like Walk
+            </button>
+            {% endif %}
+        </div>
 		
         {% if user.is_authenticated and user == walk.owner %}
         <div class="py-1 mb-2 bg-dark rounded">

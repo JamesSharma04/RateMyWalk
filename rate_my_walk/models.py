@@ -23,6 +23,9 @@ class WalkPage(models.Model):
 	enjoyment = models.IntegerField(default=5)
 	duration = models.IntegerField(default=5)
 	difficulty = models.IntegerField(default=5)
+	
+	likes = models.IntegerField(default=0)
+	id = models.AutoField(primary_key=True)
 
 	date = models.DateField(default=timezone.now)
 	

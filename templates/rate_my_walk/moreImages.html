@@ -34,15 +34,6 @@
                             </p>
                         </div>
                     </li>
-                    <div>
-                    	<strong id="like_count">{{ image.likes }}</strong> likes
-                    	{% if user.is_authenticated %}
-                    	<button id="like_btn" data-image_id="{{ image.id }}" class="btn btn-primary btn-sm" type="submit">
-                    		<span data-feather="thumbs-up"></span>
-                    		Like Image
-                		</button>
-                		{% endif %}
-                	</div>
                 </div>
             <br />
             {% endfor %}

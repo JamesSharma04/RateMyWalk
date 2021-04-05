@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -302,26 +302,25 @@ class ProfileView(View):
                       context_dict)
                       
 class ListProfilesView(View):
-    @method_decorator(login_required)
-    def get(self, request):
-        profiles = UserProfile.objects.all()
-
-        return render(request, 'rate_my_walk/list_walkers.html', {'user_profile_list': profiles})
+	@method_decorator(login_required)
+	def get(self, request):
+		profiles = UserProfile.objects.all()
+		return render(request, 'rate_my_walk/list_walkers.html', {'user_profile_list': profiles})
         
-class LikeMoreImages(View):
+class LikeWalk(View):
 	@method_decorator(login_required)
 	def get(self, request):
 		print(request.GET)
-		image_id = request.GET['image_id']
+		walk_id = request.GET['walk_id']
 		
 		try:
-			more_Images = Photo.objects.get(id=int(image_id)) 
-		except Photo.DoesNotExist:
+			walk = WalkPage.objects.get(id=int(walk_id)) 
+		except Walk.DoesNotExist:
 			return HttpResponse(-1)
 		except ValueError:
 			return HttpResponse(-1)
 			
-		more_Images.likes = more_Images.likes + 1
-		more_Images.save()
+		walk.likes = walk.likes + 1
+		walk.save()
 
-		return HttpResponse(more_Images.likes)
+		return HttpResponse(walk.likes)
