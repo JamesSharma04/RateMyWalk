@@ -8,6 +8,7 @@ $(document).ready(function() {
         alert('Please Log In to rate this walk');
     });
     
+    // on hovering over buttons, buttons change to grey
     $('.navbarText').hover(
     	function() {
     		$(this).css('color', 'grey');
@@ -16,6 +17,7 @@ $(document).ready(function() {
     		$(this).css('color', 'white');
     });
     
+    // on hovering over contact us in footer, text change to grey
     $('#contact_usFooter').hover(
     	function() {
     		$(this).css('color', 'grey');
@@ -24,21 +26,14 @@ $(document).ready(function() {
     		$(this).css('color', 'white');
     });
     
-    /*
-    $("#myDropdown").hover(
-		function() {
-            $('ul.list-group',this).stop(true, true).slideDown('500');
-        },
-        function() {
-            $('ul.list-group',this).stop(true, true).slideUp('300');
-    });
-    */
+    // delete walk button
     $("#delete-walk").click(function() {
     	if (!confirm('Are you sure you want to delete this page?')){
     	return false;
     	}
     });
     
+    // logout warning message
     $("#logout-button").click(function() {
     	if (!confirm('Are you sure you want to logout?')){
     	return false;

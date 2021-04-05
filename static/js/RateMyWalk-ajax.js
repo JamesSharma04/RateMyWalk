@@ -1,3 +1,5 @@
+// functionality for like button
+
 $(document).ready(function() {
 	$('#like_btn').click(function(){
     	var walkIdVar;
@@ -7,6 +9,7 @@ $(document).ready(function() {
     		{'walk_id': walkIdVar},
     		function(data) {
     			$('#like_count').html(data);
+    			// like button disappears when clicked
     			$('#like_btn').hide();
     		})
     });
