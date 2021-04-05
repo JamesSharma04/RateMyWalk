@@ -60,6 +60,7 @@ class Rating(models.Model):
 	difficulty = models.IntegerField(default=0)
 	enjoyment = models.IntegerField(default=0)
 	
+    #Return a meaningful value
 	def __str__(self):
 		return str(self.rater) + ": " + str(self.walk)
 

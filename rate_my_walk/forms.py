@@ -46,8 +46,11 @@ class RatingForm(forms.ModelForm):
     difficulty = forms.IntegerField(help_text="Difficulty", initial = 0, max_value = 10, min_value = 0)
     enjoyment = forms.IntegerField(help_text="Enjoyment", initial = 0, max_value = 10, min_value = 0)
 
+    #Class to give more info on the format
     class Meta:
+        #associate between the model form and the rating
         model = Rating
+        #hide foreign key
         exclude = ('walk', 'rater')
 
 class PhotoForm(forms.ModelForm):
@@ -77,6 +80,7 @@ class DeleteWalkForm(forms.ModelForm):
         model = WalkPage
         fields = ('slug', )
 
+#Display a HTML form for the user profile details
 class UserProfileForm(forms.ModelForm):
     website = forms.URLField(max_length=128, 
                              help_text="Please enter the URL of your social media, such as Facebook",
