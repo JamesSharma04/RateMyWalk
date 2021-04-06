@@ -20,17 +20,24 @@ $ git clone  https://github.com/JamesSharma04/RateMyWalk
 ```
 Then install the dependences:
 ```term
-$ python3 -m pip install -r requirements.txt --user
+$ python -m pip install -r requirements.txt --user
 ```
 
 ## Execution
 
-Set up initial data
+Database stuff:
+```term
+$ python manage.py makemigrations rate_my_walk
+```
+```term
+$ python manage.py migrate
+```
+Set up initial data:
 ```term
 $ python populate_RateMyWalk.py
 ```
 
-Browse to `http://localhost:8000` and then type:
+Browse to `https://127.0.0.1:8000/` and then type:
 ```term
 $ python manage.py runserver
 ```
