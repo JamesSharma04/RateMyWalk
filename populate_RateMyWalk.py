@@ -38,7 +38,7 @@ def generate_users():
     'first_name': 'Zsolt',
     'last_name': 'Takacs',
     'website': 'https://www.github.com/2472886T',
-    'picture': os.path.join(profilePicFolder, 'default.png')},
+    'picture': os.path.join(profilePicFolder, 'default.jpg')},
     {
     'username': 'paule34',
     'email': 'paule34@gmail.com',
@@ -46,7 +46,7 @@ def generate_users():
     'first_name': 'Paul',
     'last_name': 'Ewins',
     'website': 'https://www.github.com/polewins',
-    'picture': os.path.join(profilePicFolder, 'default.png')},
+    'picture': os.path.join(profilePicFolder, 'default.jpg')},
     ]
 
     for u in user_examples:
