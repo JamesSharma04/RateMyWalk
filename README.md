@@ -30,7 +30,7 @@ Set up initial data:
 $ python populate_RateMyWalk.py
 ```
 
-Browse to `http://localhost:8000` and then type:
+Browse to `https://127.0.0.1:8000/` and then type:
 ```term
 $ python manage.py runserver
 ```
