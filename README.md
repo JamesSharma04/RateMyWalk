@@ -25,6 +25,13 @@ $ python -m pip install -r requirements.txt --user
 
 ## Execution
 
+Database stuff:
+```term
+$ python manage.py makemigrations rate_my_walk
+```
+```term
+$ python manage.py migrate
+```
 Set up initial data:
 ```term
 $ python populate_RateMyWalk.py
