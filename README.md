@@ -20,12 +20,12 @@ $ git clone  https://github.com/JamesSharma04/RateMyWalk
 ```
 Then install the dependences:
 ```term
-$ python3 -m pip install -r requirements.txt --user
+$ python -m pip install -r requirements.txt --user
 ```
 
 ## Execution
 
-Set up initial data
+Set up initial data:
 ```term
 $ python populate_RateMyWalk.py
 ```
