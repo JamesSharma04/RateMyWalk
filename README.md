@@ -10,6 +10,8 @@
 
 * [Bing Search API](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-web-search/)
 
+* [Django Documentation](https://docs.djangoproject.com/en/2.2/)
+
 ## Installation
 
 * Python 3.7+ and Git must be installed and added to PATH, then:
