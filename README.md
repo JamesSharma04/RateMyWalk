@@ -22,6 +22,7 @@ Then install the dependences:
 ```term
 $ python -m pip install -r requirements.txt --user
 ```
+In order to run our application fully, a bing search key is required. 
 
 ## Execution
 
